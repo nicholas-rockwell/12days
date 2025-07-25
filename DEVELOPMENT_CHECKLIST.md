@@ -1,53 +1,101 @@
 # 12Days Development Checklist
 
-## Phase 1: Core System Setup (Christmas 2025 Ready)
+# 12Days Development Checklist
 
-### ✅ Project Foundation
+## Phase 1: Frontend Deployment ✅ COMPLETED
 - [x] Next.js project structure created
-- [x] TypeScript configuration
+- [x] TypeScript configuration fixed
 - [x] Tailwind CSS setup
-- [x] Component architecture planned
-- [x] AWS Amplify structure defined
+- [x] Component architecture implemented
+- [x] Frontend successfully deployed to AWS Amplify
+- [x] All TypeScript errors resolved
+- [x] Build configuration optimized
 
-### 🔄 AWS Infrastructure (TODO)
-- [ ] Initialize Amplify project (`amplify init`)
-- [ ] Configure Cognito User Pool
-- [ ] Set up DynamoDB table with proper schema
-- [ ] Configure S3 bucket for media uploads
-- [ ] Deploy Lambda functions
-- [ ] Set up API Gateway with authentication
-- [ ] Configure environment variables
+## Phase 2: Backend Infrastructure Restoration (IN PROGRESS)
 
-### 🔄 Authentication System (TODO)
-- [ ] Implement Cognito integration in frontend
-- [ ] Create login/signup flow
-- [ ] Add admin code functionality
-- [ ] Set up user profile management
-- [ ] Test authentication flows
+### 🔄 AWS Amplify Gen 2 Backend Setup
+- [x] **Step 1**: Restore amplify directory structure
+- [x] **Step 2**: Add backend dependencies back to package.json incrementally
+- [x] **Step 3**: Update amplify.yml for hybrid frontend+backend build
+- [x] **Step 4**: Deploy basic Amplify backend (auth + data only) - Build successful, ready for deployment
+- [ ] **Step 5**: Verify backend deployment and resource creation
 
-### 🔄 Game Management (TODO)
-- [ ] Implement game creation form
-- [ ] Build admin game setup (12-day challenge designer)
-- [ ] Create game joining functionality
-- [ ] Add invite code system
-- [ ] Test multi-game participation
+### 🔄 Authentication System Restoration
+- [ ] **Step 6**: Deploy Cognito User Pool via Amplify
+- [ ] **Step 7**: Update frontend Amplify configuration with real backend outputs
+- [ ] **Step 8**: Test login/signup flow with real Cognito
+- [ ] **Step 9**: Add admin code functionality
+- [ ] **Step 10**: Verify user profile management works
 
-### 🔄 Challenge System (TODO)
-- [ ] Build basic challenge framework
-- [ ] Implement photo upload challenges
-- [ ] Create trivia challenge system
-- [ ] Add text response challenges
-- [ ] Build submission and scoring system
-- [ ] Test daily progression logic
+### 🔄 Database Schema Deployment
+- [ ] **Step 11**: Deploy DynamoDB tables via Amplify Data
+- [ ] **Step 12**: Test database connectivity from frontend
+- [ ] **Step 13**: Verify CRUD operations work
+- [ ] **Step 14**: Add proper authorization rules
+- [ ] **Step 15**: Test data persistence and queries
 
-### 🔄 Payment Integration (TODO)
-- [ ] Set up Stripe account and keys
-- [ ] Implement Stripe Checkout
-- [ ] Create webhook handler
-- [ ] Add subscription status tracking
-- [ ] Test payment flows
+### 🔄 Lambda Functions Deployment
+- [ ] **Step 16**: Deploy create-game Lambda function
+- [ ] **Step 17**: Deploy join-game Lambda function  
+- [ ] **Step 18**: Deploy submit-challenge Lambda function
+- [ ] **Step 19**: Deploy get-game-data Lambda function
+- [ ] **Step 20**: Deploy stripe-webhook Lambda function
+- [ ] **Step 21**: Deploy admin functions
+- [ ] **Step 22**: Test all Lambda endpoints from frontend
 
-### 🔄 Core UI Views (TODO)
+### 🔄 Storage and Media Upload
+- [ ] **Step 23**: Deploy S3 storage via Amplify Storage
+- [ ] **Step 24**: Configure proper S3 bucket policies
+- [ ] **Step 25**: Test file upload functionality
+- [ ] **Step 26**: Verify image processing pipeline
+- [ ] **Step 27**: Add file type and size validation
+
+### 🔄 Game Management System
+- [ ] **Step 28**: Test game creation with real backend
+- [ ] **Step 29**: Verify admin game setup functionality
+- [ ] **Step 30**: Test game joining with invite codes
+- [ ] **Step 31**: Add multi-game participation support
+- [ ] **Step 32**: Test leaderboard data flow
+
+### 🔄 Challenge System Integration
+- [ ] **Step 33**: Implement photo upload challenges with S3
+- [ ] **Step 34**: Connect trivia system to DynamoDB
+- [ ] **Step 35**: Add text response challenge handling
+- [ ] **Step 36**: Build submission and scoring system
+- [ ] **Step 37**: Test daily progression logic with real data
+
+### 🔄 Payment Integration (Final Phase)
+- [ ] **Step 38**: Set up Stripe account and keys
+- [ ] **Step 39**: Implement Stripe Checkout integration
+- [ ] **Step 40**: Deploy and test webhook handler Lambda
+- [ ] **Step 41**: Add subscription status tracking to DynamoDB
+- [ ] **Step 42**: Test end-to-end payment flows
+
+## Phase 3: Testing & Optimization
+
+### 🔄 Integration Testing
+- [ ] **Step 43**: End-to-end user journey testing
+- [ ] **Step 44**: Multi-user game testing
+- [ ] **Step 45**: Performance optimization
+- [ ] **Step 46**: Security audit and penetration testing
+- [ ] **Step 47**: Mobile responsiveness testing
+
+### 🔄 Production Readiness
+- [ ] **Step 48**: Environment variable security review
+- [ ] **Step 49**: Error handling and logging setup
+- [ ] **Step 50**: Monitoring and alerting configuration
+- [ ] **Step 51**: Backup and disaster recovery procedures
+- [ ] **Step 52**: Final deployment to production domain
+
+## Current Status: ✅ Frontend Deployed Successfully
+**Next Action**: Step 1 - Restore amplify directory structure
+
+## Notes for Backend Restoration:
+- All backend code preserved in `amplify-backend-disabled/` directory
+- Frontend deployment working and stable
+- Plan to restore backend incrementally to avoid previous @parcel/watcher issues
+- Will use environment variables to control build phases
+- Each step will be tested before proceeding to next
 - [ ] Complete Dashboard component
 - [ ] Build functional Leaderboard
 - [ ] Create basic Shop view

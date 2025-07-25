@@ -7,19 +7,18 @@ export const auth = defineAuth({
   userAttributes: {
     nickname: {
       mutable: true,
-      required: false,
     },
     'custom:user_id': {
+      dataType: 'String',
       mutable: false,
-      required: true,
     },
     'custom:jinglebells': {
+      dataType: 'Number',
       mutable: true,
-      required: false,
     },
     'custom:is_admin': {
+      dataType: 'Boolean',
       mutable: true,
-      required: false,
     },
   },
   accountRecovery: 'EMAIL_ONLY',

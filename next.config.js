@@ -7,7 +7,7 @@ const nextConfig = {
     // Exclude the amplify directory from webpack compilation
     config.watchOptions = {
       ...config.watchOptions,
-      ignored: ['**/amplify/**', '**/amplify-backend-disabled/**'],
+      ignored: ['**/node_modules/**', '**/amplify-functions-backup/**'],
     };
     
     // Exclude amplify directory from module resolution
