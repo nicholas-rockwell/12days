@@ -22,7 +22,10 @@
     "@aws-amplify/backend-auth": "^1.0.0",
     "@aws-amplify/backend-data": "^1.0.0",
     "@aws-amplify/backend-storage": "^1.0.0",
-    "@aws-amplify/backend-function": "^1.0.0"
+    "@aws-amplify/backend-function": "^1.0.0",
+    "@aws-sdk/client-dynamodb": "^3.400.0",
+    "@aws-sdk/lib-dynamodb": "^3.400.0",
+    "stripe": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.0",

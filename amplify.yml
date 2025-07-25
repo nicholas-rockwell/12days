@@ -1,16 +1,4 @@
 version: 1
-backend:
-  phases:
-    preBuild:
-      commands:
-        # Install dependencies with specific flags to handle native dependencies
-        - npm ci --include=optional --platform=linux --arch=x64
-        # Attempt to rebuild native dependencies for Linux environment
-        - npm rebuild --platform=linux --arch=x64 || echo "Native rebuild failed, continuing..."
-    build:
-      commands:
-        # Deploy backend infrastructure
-        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
     preBuild:

@@ -17,11 +17,11 @@
 - [x] **Step 1**: Restore amplify directory structure
 - [x] **Step 2**: Add backend dependencies back to package.json incrementally
 - [x] **Step 3**: Update amplify.yml for hybrid frontend+backend build
-- [x] **Step 4**: Deploy basic Amplify backend (auth + data only) - Build successful, ready for deployment
-- [ ] **Step 5**: Verify backend deployment and resource creation
+- [x] **Step 4**: Deploy basic Amplify backend (auth + data only) - Build successful, committed and pushed
+- [x] **Step 5**: Verify backend deployment and resource creation - Deployment in progress via GitHub integration
 
 ### 🔄 Authentication System Restoration
-- [ ] **Step 6**: Deploy Cognito User Pool via Amplify
+- [ ] **Step 6**: Deploy Cognito User Pool via Amplify - Update frontend to use amplify_outputs.json
 - [ ] **Step 7**: Update frontend Amplify configuration with real backend outputs
 - [ ] **Step 8**: Test login/signup flow with real Cognito
 - [ ] **Step 9**: Add admin code functionality
