@@ -5,30 +5,22 @@ import { Authenticator } from '@aws-amplify/ui-react'
 import { GameProvider } from '@/contexts/GameContext'
 import '@aws-amplify/ui-react/styles.css'
 
-// Configure Amplify (this will be populated when you run amplify generate)
-Amplify.configure({
+// Minimal Amplify configuration for frontend-only deployment
+// This will be replaced with actual backend outputs when backend is deployed
+const amplifyConfig = {
   Auth: {
     Cognito: {
-      region: process.env.NEXT_PUBLIC_AWS_REGION || 'us-west-2',
-      userPoolId: process.env.NEXT_PUBLIC_USER_POOL_ID || '',
-      userPoolClientId: process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID || '',
-    }
-  },
-  API: {
-    REST: {
-      TwelveDaysAPI: {
-        endpoint: process.env.NEXT_PUBLIC_API_ENDPOINT || '',
-        region: process.env.NEXT_PUBLIC_AWS_REGION || 'us-west-2',
-      }
-    }
-  },
-  Storage: {
-    S3: {
-      bucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET || '',
+      userPoolId: process.env.NEXT_PUBLIC_USER_POOL_ID || 'us-west-2_placeholder',
+      userPoolClientId: process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID || 'placeholder',
       region: process.env.NEXT_PUBLIC_AWS_REGION || 'us-west-2',
     }
   }
-})
+}
+
+// Only configure Amplify if we have real environment variables
+if (process.env.NEXT_PUBLIC_USER_POOL_ID && process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID) {
+  Amplify.configure(amplifyConfig)
+}
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

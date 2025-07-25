@@ -40,7 +40,7 @@ export function AuthPage() {
           >
             {({ signOut, user }) => (
               <div className="text-center">
-                <p className="text-white mb-4">Welcome, {user?.attributes?.nickname || user?.username}!</p>
+                <p className="text-white mb-4">Welcome, {user?.username}!</p>
                 <button
                   onClick={signOut}
                   className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors"
