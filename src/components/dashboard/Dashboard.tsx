@@ -16,6 +16,13 @@ export function Dashboard() {
   const { currentGame, userProfile, loading } = useGame()
   const [currentView, setCurrentView] = useState<ViewType>('games')
 
+  // Type-safe wrapper for onViewChange
+  const handleViewChange = (view: string) => {
+    if (['games', 'leaderboard', 'shop', 'challenge', 'profile', 'admin'].includes(view)) {
+      setCurrentView(view as ViewType)
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-red-600 via-green-600 to-blue-600 flex items-center justify-center">
@@ -33,7 +40,7 @@ export function Dashboard() {
       <div className="min-h-screen bg-gradient-to-br from-red-600 via-green-600 to-blue-600">
         <NavigationBar 
           currentView={currentView} 
-          onViewChange={setCurrentView}
+          onViewChange={handleViewChange}
           showGameNavigation={false}
         />
         <GameSelection />
@@ -62,7 +69,7 @@ export function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-red-600 via-green-600 to-blue-600">
       <NavigationBar 
         currentView={currentView} 
-        onViewChange={setCurrentView}
+        onViewChange={handleViewChange}
         showGameNavigation={true}
       />
       
