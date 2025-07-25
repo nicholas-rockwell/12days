@@ -17,7 +17,15 @@
     "@stripe/stripe-js": "^2.1.0",
     "@stripe/react-stripe-js": "^2.1.0",
     "framer-motion": "^10.16.0",
-    "lucide-react": "^0.294.0"
+    "lucide-react": "^0.294.0",
+    "@aws-amplify/backend": "^1.0.0",
+    "@aws-amplify/backend-auth": "^1.0.0",
+    "@aws-amplify/backend-data": "^1.0.0",
+    "@aws-amplify/backend-function": "^1.0.0",
+    "@aws-amplify/backend-storage": "^1.0.0",
+    "@aws-amplify/backend-cli": "^1.0.0",
+    "aws-cdk-lib": "^2.100.0",
+    "constructs": "^10.3.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.0",
