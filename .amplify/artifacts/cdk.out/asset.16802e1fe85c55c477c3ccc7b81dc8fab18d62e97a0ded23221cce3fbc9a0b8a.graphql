@@ -1,0 +1,349 @@
+type GameUser @aws_iam @aws_cognito_user_pools {
+  user_id: String!
+  nickname: String!
+  points: Int
+  jinglebells: Int
+  rank: Int
+  created_at: AWSDateTime
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+type Game @aws_iam @aws_cognito_user_pools {
+  game_name: String!
+  start_date: AWSDate!
+  invite_code: String!
+  admin_user_id: String
+  created_at: AWSDateTime
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+input AmplifyAIConversationTurnErrorInput {
+  errorType: String!
+  message: String!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelGameUserConnection @aws_iam @aws_cognito_user_pools {
+  items: [GameUser]!
+  nextToken: String
+}
+
+input ModelGameUserFilterInput {
+  user_id: ModelStringInput
+  nickname: ModelStringInput
+  points: ModelIntInput
+  jinglebells: ModelIntInput
+  rank: ModelIntInput
+  created_at: ModelStringInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelGameUserFilterInput]
+  or: [ModelGameUserFilterInput]
+  not: ModelGameUserFilterInput
+  owner: ModelStringInput
+}
+
+type Query {
+  getGameUser(id: ID!): GameUser @aws_iam @aws_cognito_user_pools
+  listGameUsers(filter: ModelGameUserFilterInput, limit: Int, nextToken: String): ModelGameUserConnection @aws_iam @aws_cognito_user_pools
+  getGame(id: ID!): Game @aws_iam @aws_cognito_user_pools
+  listGames(filter: ModelGameFilterInput, limit: Int, nextToken: String): ModelGameConnection @aws_iam @aws_cognito_user_pools
+}
+
+input ModelGameUserConditionInput {
+  user_id: ModelStringInput
+  nickname: ModelStringInput
+  points: ModelIntInput
+  jinglebells: ModelIntInput
+  rank: ModelIntInput
+  created_at: ModelStringInput
+  and: [ModelGameUserConditionInput]
+  or: [ModelGameUserConditionInput]
+  not: ModelGameUserConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  owner: ModelStringInput
+}
+
+input CreateGameUserInput {
+  user_id: String!
+  nickname: String!
+  points: Int
+  jinglebells: Int
+  rank: Int
+  created_at: AWSDateTime
+  id: ID
+}
+
+input UpdateGameUserInput {
+  user_id: String
+  nickname: String
+  points: Int
+  jinglebells: Int
+  rank: Int
+  created_at: AWSDateTime
+  id: ID!
+}
+
+input DeleteGameUserInput {
+  id: ID!
+}
+
+type Mutation {
+  createGameUser(input: CreateGameUserInput!, condition: ModelGameUserConditionInput): GameUser @aws_iam @aws_cognito_user_pools
+  updateGameUser(input: UpdateGameUserInput!, condition: ModelGameUserConditionInput): GameUser @aws_iam @aws_cognito_user_pools
+  deleteGameUser(input: DeleteGameUserInput!, condition: ModelGameUserConditionInput): GameUser @aws_iam @aws_cognito_user_pools
+  createGame(input: CreateGameInput!, condition: ModelGameConditionInput): Game @aws_iam @aws_cognito_user_pools
+  updateGame(input: UpdateGameInput!, condition: ModelGameConditionInput): Game @aws_iam @aws_cognito_user_pools
+  deleteGame(input: DeleteGameInput!, condition: ModelGameConditionInput): Game @aws_iam @aws_cognito_user_pools
+}
+
+input ModelSubscriptionGameUserFilterInput {
+  user_id: ModelSubscriptionStringInput
+  nickname: ModelSubscriptionStringInput
+  points: ModelSubscriptionIntInput
+  jinglebells: ModelSubscriptionIntInput
+  rank: ModelSubscriptionIntInput
+  created_at: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionGameUserFilterInput]
+  or: [ModelSubscriptionGameUserFilterInput]
+  owner: ModelStringInput
+}
+
+type Subscription {
+  onCreateGameUser(filter: ModelSubscriptionGameUserFilterInput, owner: String): GameUser @aws_subscribe(mutations: ["createGameUser"]) @aws_iam @aws_cognito_user_pools
+  onUpdateGameUser(filter: ModelSubscriptionGameUserFilterInput, owner: String): GameUser @aws_subscribe(mutations: ["updateGameUser"]) @aws_iam @aws_cognito_user_pools
+  onDeleteGameUser(filter: ModelSubscriptionGameUserFilterInput, owner: String): GameUser @aws_subscribe(mutations: ["deleteGameUser"]) @aws_iam @aws_cognito_user_pools
+  onCreateGame(filter: ModelSubscriptionGameFilterInput, owner: String): Game @aws_subscribe(mutations: ["createGame"]) @aws_iam @aws_cognito_user_pools
+  onUpdateGame(filter: ModelSubscriptionGameFilterInput, owner: String): Game @aws_subscribe(mutations: ["updateGame"]) @aws_iam @aws_cognito_user_pools
+  onDeleteGame(filter: ModelSubscriptionGameFilterInput, owner: String): Game @aws_subscribe(mutations: ["deleteGame"]) @aws_iam @aws_cognito_user_pools
+}
+
+type ModelGameConnection @aws_iam @aws_cognito_user_pools {
+  items: [Game]!
+  nextToken: String
+}
+
+input ModelGameFilterInput {
+  game_name: ModelStringInput
+  start_date: ModelStringInput
+  invite_code: ModelStringInput
+  admin_user_id: ModelStringInput
+  created_at: ModelStringInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelGameFilterInput]
+  or: [ModelGameFilterInput]
+  not: ModelGameFilterInput
+  owner: ModelStringInput
+}
+
+input ModelGameConditionInput {
+  game_name: ModelStringInput
+  start_date: ModelStringInput
+  invite_code: ModelStringInput
+  admin_user_id: ModelStringInput
+  created_at: ModelStringInput
+  and: [ModelGameConditionInput]
+  or: [ModelGameConditionInput]
+  not: ModelGameConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  owner: ModelStringInput
+}
+
+input CreateGameInput {
+  game_name: String!
+  start_date: AWSDate!
+  invite_code: String!
+  admin_user_id: String
+  created_at: AWSDateTime
+  id: ID
+}
+
+input UpdateGameInput {
+  game_name: String
+  start_date: AWSDate
+  invite_code: String
+  admin_user_id: String
+  created_at: AWSDateTime
+  id: ID!
+}
+
+input DeleteGameInput {
+  id: ID!
+}
+
+input ModelSubscriptionGameFilterInput {
+  game_name: ModelSubscriptionStringInput
+  start_date: ModelSubscriptionStringInput
+  invite_code: ModelSubscriptionStringInput
+  admin_user_id: ModelSubscriptionStringInput
+  created_at: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionGameFilterInput]
+  or: [ModelSubscriptionGameFilterInput]
+  owner: ModelStringInput
+}

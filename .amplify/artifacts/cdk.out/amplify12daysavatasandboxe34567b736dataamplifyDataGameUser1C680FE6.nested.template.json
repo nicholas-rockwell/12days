@@ -1,0 +1,2199 @@
+{
+ "Parameters": {
+  "DynamoDBModelTableReadIOPS": {
+   "Type": "Number",
+   "Default": 5,
+   "Description": "The number of read IOPS the table should support."
+  },
+  "DynamoDBModelTableWriteIOPS": {
+   "Type": "Number",
+   "Default": 5,
+   "Description": "The number of write IOPS the table should support."
+  },
+  "DynamoDBBillingMode": {
+   "Type": "String",
+   "Default": "PAY_PER_REQUEST",
+   "AllowedValues": [
+    "PAY_PER_REQUEST",
+    "PROVISIONED"
+   ],
+   "Description": "Configure @model types to create DynamoDB tables with PAY_PER_REQUEST or PROVISIONED billing modes."
+  },
+  "DynamoDBEnablePointInTimeRecovery": {
+   "Type": "String",
+   "Default": "false",
+   "AllowedValues": [
+    "true",
+    "false"
+   ],
+   "Description": "Whether to enable Point in Time Recovery on the table."
+  },
+  "DynamoDBEnableServerSideEncryption": {
+   "Type": "String",
+   "Default": "true",
+   "AllowedValues": [
+    "true",
+    "false"
+   ],
+   "Description": "Enable server side encryption powered by KMS."
+  },
+  "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource7D17C944Outputsamplify12daysavatasandboxe34567b736dataamplifyDataAmplifyTableManagerTableManagerCustomProviderfF7F75BE5": {
+   "Type": "String"
+  },
+  "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId": {
+   "Type": "String"
+  },
+  "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName": {
+   "Type": "String"
+  },
+  "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref": {
+   "Type": "String"
+  },
+  "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref": {
+   "Type": "String"
+  },
+  "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef": {
+   "Type": "String"
+  }
+ },
+ "Conditions": {
+  "HasEnvironmentParameter": {
+   "Fn::Not": [
+    {
+     "Fn::Equals": [
+      "NONE",
+      "NONE"
+     ]
+    }
+   ]
+  },
+  "ShouldUsePayPerRequestBilling": {
+   "Fn::Equals": [
+    {
+     "Ref": "DynamoDBBillingMode"
+    },
+    "PAY_PER_REQUEST"
+   ]
+  },
+  "ShouldUsePointInTimeRecovery": {
+   "Fn::Equals": [
+    {
+     "Ref": "DynamoDBEnablePointInTimeRecovery"
+    },
+    "true"
+   ]
+  },
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Resources": {
+  "GameUserTable": {
+   "Type": "Custom::AmplifyDynamoDBTable",
+   "Properties": {
+    "ServiceToken": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource7D17C944Outputsamplify12daysavatasandboxe34567b736dataamplifyDataAmplifyTableManagerTableManagerCustomProviderfF7F75BE5"
+    },
+    "tableName": {
+     "Fn::Join": [
+      "",
+      [
+       "GameUser-",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "-NONE"
+      ]
+     ]
+    },
+    "attributeDefinitions": [
+     {
+      "attributeName": "id",
+      "attributeType": "S"
+     }
+    ],
+    "keySchema": [
+     {
+      "attributeName": "id",
+      "keyType": "HASH"
+     }
+    ],
+    "provisionedThroughput": {
+     "Fn::If": [
+      "ShouldUsePayPerRequestBilling",
+      {
+       "Ref": "AWS::NoValue"
+      },
+      {
+       "ReadCapacityUnits": {
+        "Ref": "DynamoDBModelTableReadIOPS"
+       },
+       "WriteCapacityUnits": {
+        "Ref": "DynamoDBModelTableWriteIOPS"
+       }
+      }
+     ]
+    },
+    "sseSpecification": {
+     "sseEnabled": false
+    },
+    "streamSpecification": {
+     "streamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "deletionProtectionEnabled": false,
+    "allowDestructiveGraphqlSchemaUpdates": true,
+    "replaceTableUponGsiUpdate": true,
+    "pointInTimeRecoverySpecification": {
+     "Fn::If": [
+      "ShouldUsePointInTimeRecovery",
+      {
+       "PointInTimeRecoveryEnabled": true
+      },
+      {
+       "Ref": "AWS::NoValue"
+      }
+     ]
+    },
+    "billingMode": {
+     "Fn::If": [
+      "ShouldUsePayPerRequestBilling",
+      "PAY_PER_REQUEST",
+      {
+       "Ref": "AWS::NoValue"
+      }
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/GameUserTable/Default/Default"
+   }
+  },
+  "GameUserIAMRole9E0E593E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "appsync.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "dynamodb:BatchGetItem",
+          "dynamodb:BatchWriteItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:GetItem",
+          "dynamodb:Scan",
+          "dynamodb:Query",
+          "dynamodb:UpdateItem",
+          "dynamodb:ConditionCheckItem",
+          "dynamodb:DescribeTable",
+          "dynamodb:GetRecords",
+          "dynamodb:GetShardIterator"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          {
+           "Fn::Sub": [
+            "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tablename}",
+            {
+             "tablename": {
+              "Fn::Join": [
+               "",
+               [
+                "GameUser-",
+                {
+                 "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+                },
+                "-NONE"
+               ]
+              ]
+             }
+            }
+           ]
+          },
+          {
+           "Fn::Sub": [
+            "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tablename}/*",
+            {
+             "tablename": {
+              "Fn::Join": [
+               "",
+               [
+                "GameUser-",
+                {
+                 "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+                },
+                "-NONE"
+               ]
+              ]
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "DynamoDBAccess"
+     }
+    ],
+    "RoleName": {
+     "Fn::Join": [
+      "",
+      [
+       "GameUserIAMRoleac957c-",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "-NONE"
+      ]
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "amplify:deployment-type",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "amplify:friendly-name",
+      "Value": "amplifyData"
+     },
+     {
+      "Key": "created-by",
+      "Value": "amplify"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/GameUserIAMRole/Resource"
+   }
+  },
+  "GameUserDataSource": {
+   "Type": "AWS::AppSync::DataSource",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DynamoDBConfig": {
+     "AwsRegion": {
+      "Ref": "AWS::Region"
+     },
+     "TableName": {
+      "Fn::Select": [
+       1,
+       {
+        "Fn::Split": [
+         "/",
+         {
+          "Fn::Select": [
+           5,
+           {
+            "Fn::Split": [
+             ":",
+             {
+              "Fn::GetAtt": [
+               "GameUserTable",
+               "TableArn"
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "Name": "GameUserTable",
+    "ServiceRoleArn": {
+     "Fn::GetAtt": [
+      "GameUserIAMRole9E0E593E",
+      "Arn"
+     ]
+    },
+    "Type": "AMAZON_DYNAMODB"
+   },
+   "DependsOn": [
+    "GameUserIAMRole9E0E593E"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/GameUserDataSource/Resource"
+   }
+  },
+  "QuerygetGameUserauth0FunctionQuerygetGameUserauth0FunctionAppSyncFunction4299C510": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerygetGameUserauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6b25c9b572c67e0f7ad41cb8019a90825f3db4b02a0a15b837c7a82dcb302060.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/QuerygetGameUserauth0Function/QuerygetGameUserauth0Function.AppSyncFunction"
+   }
+  },
+  "QuerygetGameUserpostAuth0FunctionQuerygetGameUserpostAuth0FunctionAppSyncFunctionA468F868": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerygetGameUserpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/QuerygetGameUserpostAuth0Function/QuerygetGameUserpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "QueryGetGameUserDataResolverFnQueryGetGameUserDataResolverFnAppSyncFunction904D1A1B": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "GameUserDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryGetGameUserDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/08f4d557693d96c1a4efba0f9dc91330e4b19772fd5477c156468843e3d9cb5e.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4c6a2d29f01c6091bd1d9afe16e5849d456c96f17c3b215938c8067399532719.vtl"
+    }
+   },
+   "DependsOn": [
+    "GameUserDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/QueryGetGameUserDataResolverFn/QueryGetGameUserDataResolverFn.AppSyncFunction"
+   }
+  },
+  "GetGameUserResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "FieldName": "getGameUser",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QuerygetGameUserauth0FunctionQuerygetGameUserauth0FunctionAppSyncFunction4299C510",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerygetGameUserpostAuth0FunctionQuerygetGameUserpostAuth0FunctionAppSyncFunctionA468F868",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QueryGetGameUserDataResolverFnQueryGetGameUserDataResolverFnAppSyncFunction904D1A1B",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"getGameUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "GameUserTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Query"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/queryGetGameUserResolver"
+   }
+  },
+  "QuerylistGameUsersauth0FunctionQuerylistGameUsersauth0FunctionAppSyncFunction04B047E6": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistGameUsersauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6b25c9b572c67e0f7ad41cb8019a90825f3db4b02a0a15b837c7a82dcb302060.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/QuerylistGameUsersauth0Function/QuerylistGameUsersauth0Function.AppSyncFunction"
+   }
+  },
+  "QuerylistGameUserspostAuth0FunctionQuerylistGameUserspostAuth0FunctionAppSyncFunctionC1B44456": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistGameUserspostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/QuerylistGameUserspostAuth0Function/QuerylistGameUserspostAuth0Function.AppSyncFunction"
+   }
+  },
+  "QueryListGameUsersDataResolverFnQueryListGameUsersDataResolverFnAppSyncFunctionED93DD2B": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "GameUserDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryListGameUsersDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9fcbe070ecd3023c5bf5b966fa9584757db9762eef123bad0820bd87591b2174.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cc01911d0269d4080ea57505dc445dfc315ef7ad85d3d9d4ea1357858bff451d.vtl"
+    }
+   },
+   "DependsOn": [
+    "GameUserDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/QueryListGameUsersDataResolverFn/QueryListGameUsersDataResolverFn.AppSyncFunction"
+   }
+  },
+  "ListGameUserResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "FieldName": "listGameUsers",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QuerylistGameUsersauth0FunctionQuerylistGameUsersauth0FunctionAppSyncFunction04B047E6",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerylistGameUserspostAuth0FunctionQuerylistGameUserspostAuth0FunctionAppSyncFunctionC1B44456",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QueryListGameUsersDataResolverFnQueryListGameUsersDataResolverFnAppSyncFunctionED93DD2B",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"listGameUsers\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "GameUserTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Query"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/queryListGameUsersResolver"
+   }
+  },
+  "MutationcreateGameUserinit0FunctionMutationcreateGameUserinit0FunctionAppSyncFunction8DB94984": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateGameUserinit0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a183ddccbd956316c38ef97177b8f088ef0826f62023323f5ae6053d348ccffc.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationcreateGameUserinit0Function/MutationcreateGameUserinit0Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateGameUserinit1FunctionMutationcreateGameUserinit1FunctionAppSyncFunction3AA90721": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateGameUserinit1Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/dd4ab008f686fe54141ace8d8e677aaec1abe0ea4746558efcda72ad5f17fb02.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationcreateGameUserinit1Function/MutationcreateGameUserinit1Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateGameUserauth0FunctionMutationcreateGameUserauth0FunctionAppSyncFunctionFC1F86DE": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateGameUserauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/deda5fe9f20e8934dac560a1af800397e1ba451f0f5f5ba1c817992ee3057a45.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationcreateGameUserauth0Function/MutationcreateGameUserauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateGameUserpostAuth0FunctionMutationcreateGameUserpostAuth0FunctionAppSyncFunctionAC8460AA": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateGameUserpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationcreateGameUserpostAuth0Function/MutationcreateGameUserpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationCreateGameUserDataResolverFnMutationCreateGameUserDataResolverFnAppSyncFunction1F6F2449": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "GameUserDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationCreateGameUserDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/21bb481ca773d84a7a382ea0051fa2f562d23fbfa297f667f7a43a73cc2738eb.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "GameUserDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationCreateGameUserDataResolverFn/MutationCreateGameUserDataResolverFn.AppSyncFunction"
+   }
+  },
+  "CreateGameUserResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "FieldName": "createGameUser",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationcreateGameUserinit0FunctionMutationcreateGameUserinit0FunctionAppSyncFunction8DB94984",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateGameUserinit1FunctionMutationcreateGameUserinit1FunctionAppSyncFunction3AA90721",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateGameUserauth0FunctionMutationcreateGameUserauth0FunctionAppSyncFunctionFC1F86DE",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateGameUserpostAuth0FunctionMutationcreateGameUserpostAuth0FunctionAppSyncFunctionAC8460AA",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationCreateGameUserDataResolverFnMutationCreateGameUserDataResolverFnAppSyncFunction1F6F2449",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"createGameUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "GameUserTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/mutationCreateGameUserResolver"
+   }
+  },
+  "MutationupdateGameUserinit0FunctionMutationupdateGameUserinit0FunctionAppSyncFunction1BDA4E57": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateGameUserinit0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/06db846fd14e6fc371f22b12b5545ba8e2dbfeda85d8c8d586c71c282166657b.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationupdateGameUserinit0Function/MutationupdateGameUserinit0Function.AppSyncFunction"
+   }
+  },
+  "MutationupdateGameUserauth0FunctionMutationupdateGameUserauth0FunctionAppSyncFunction376D74EA": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "GameUserDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateGameUserauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/64fdc4d57d4b99f355556c46ac45795938e7bc32abe49547bf096fe8239d2919.vtl"
+    }
+   },
+   "DependsOn": [
+    "GameUserDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationupdateGameUserauth0Function/MutationupdateGameUserauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationupdateGameUserpostAuth0FunctionMutationupdateGameUserpostAuth0FunctionAppSyncFunction20723EC3": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateGameUserpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationupdateGameUserpostAuth0Function/MutationupdateGameUserpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationUpdateGameUserDataResolverFnMutationUpdateGameUserDataResolverFnAppSyncFunctionD62F63FB": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "GameUserDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationUpdateGameUserDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/474bf0776ec2164a13191d1a0a9e057154931e4918fea5086f49850d02a5371b.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "GameUserDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationUpdateGameUserDataResolverFn/MutationUpdateGameUserDataResolverFn.AppSyncFunction"
+   }
+  },
+  "UpdateGameUserResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "FieldName": "updateGameUser",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationupdateGameUserinit0FunctionMutationupdateGameUserinit0FunctionAppSyncFunction1BDA4E57",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationupdateGameUserauth0FunctionMutationupdateGameUserauth0FunctionAppSyncFunction376D74EA",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationupdateGameUserpostAuth0FunctionMutationupdateGameUserpostAuth0FunctionAppSyncFunction20723EC3",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationUpdateGameUserDataResolverFnMutationUpdateGameUserDataResolverFnAppSyncFunctionD62F63FB",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"updateGameUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "GameUserTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/mutationUpdateGameUserResolver"
+   }
+  },
+  "MutationdeleteGameUserauth0FunctionMutationdeleteGameUserauth0FunctionAppSyncFunctionCF835A81": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "GameUserDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationdeleteGameUserauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/867fb7d7eb8e4127b6d0136b82c5c3f74a52eb410297086859986f8e7e4b02aa.vtl"
+    }
+   },
+   "DependsOn": [
+    "GameUserDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationdeleteGameUserauth0Function/MutationdeleteGameUserauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationdeleteGameUserpostAuth0FunctionMutationdeleteGameUserpostAuth0FunctionAppSyncFunction283D7190": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationdeleteGameUserpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationdeleteGameUserpostAuth0Function/MutationdeleteGameUserpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationDeleteGameUserDataResolverFnMutationDeleteGameUserDataResolverFnAppSyncFunction92E31968": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "GameUserDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationDeleteGameUserDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4f7907d1209a2c9953a0c053df402c634e359546d70c7cc5c2e8e21ea734880f.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "GameUserDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/MutationDeleteGameUserDataResolverFn/MutationDeleteGameUserDataResolverFn.AppSyncFunction"
+   }
+  },
+  "DeleteGameUserResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "FieldName": "deleteGameUser",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationdeleteGameUserauth0FunctionMutationdeleteGameUserauth0FunctionAppSyncFunctionCF835A81",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationdeleteGameUserpostAuth0FunctionMutationdeleteGameUserpostAuth0FunctionAppSyncFunction283D7190",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationDeleteGameUserDataResolverFnMutationDeleteGameUserDataResolverFnAppSyncFunction92E31968",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"deleteGameUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "GameUserTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/mutationDeleteGameUserResolver"
+   }
+  },
+  "SubscriptiononCreateGameUserauth0FunctionSubscriptiononCreateGameUserauth0FunctionAppSyncFunctionB9D57842": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononCreateGameUserauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3b6d810ef43cdbd93ef462c40b0df0328b89e04f1473a4f82f1178da1f1d5aa0.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/SubscriptiononCreateGameUserauth0Function/SubscriptiononCreateGameUserauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononCreateGameUserpostAuth0FunctionSubscriptiononCreateGameUserpostAuth0FunctionAppSyncFunction599BE4DA": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononCreateGameUserpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/SubscriptiononCreateGameUserpostAuth0Function/SubscriptiononCreateGameUserpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnCreateGameUserDataResolverFnSubscriptionOnCreateGameUserDataResolverFnAppSyncFunction99EF59EB": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnCreateGameUserDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/SubscriptionOnCreateGameUserDataResolverFn/SubscriptionOnCreateGameUserDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononCreateGameUserResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "FieldName": "onCreateGameUser",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononCreateGameUserauth0FunctionSubscriptiononCreateGameUserauth0FunctionAppSyncFunctionB9D57842",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononCreateGameUserpostAuth0FunctionSubscriptiononCreateGameUserpostAuth0FunctionAppSyncFunction599BE4DA",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnCreateGameUserDataResolverFnSubscriptionOnCreateGameUserDataResolverFnAppSyncFunction99EF59EB",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onCreateGameUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/subscriptionOnCreateGameUserResolver"
+   }
+  },
+  "SubscriptiononUpdateGameUserauth0FunctionSubscriptiononUpdateGameUserauth0FunctionAppSyncFunctionF9F6D0D1": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononUpdateGameUserauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3b6d810ef43cdbd93ef462c40b0df0328b89e04f1473a4f82f1178da1f1d5aa0.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/SubscriptiononUpdateGameUserauth0Function/SubscriptiononUpdateGameUserauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononUpdateGameUserpostAuth0FunctionSubscriptiononUpdateGameUserpostAuth0FunctionAppSyncFunction9CBB0108": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononUpdateGameUserpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/SubscriptiononUpdateGameUserpostAuth0Function/SubscriptiononUpdateGameUserpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnUpdateGameUserDataResolverFnSubscriptionOnUpdateGameUserDataResolverFnAppSyncFunctionC976A56D": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnUpdateGameUserDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/SubscriptionOnUpdateGameUserDataResolverFn/SubscriptionOnUpdateGameUserDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononUpdateGameUserResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "FieldName": "onUpdateGameUser",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononUpdateGameUserauth0FunctionSubscriptiononUpdateGameUserauth0FunctionAppSyncFunctionF9F6D0D1",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononUpdateGameUserpostAuth0FunctionSubscriptiononUpdateGameUserpostAuth0FunctionAppSyncFunction9CBB0108",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnUpdateGameUserDataResolverFnSubscriptionOnUpdateGameUserDataResolverFnAppSyncFunctionC976A56D",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onUpdateGameUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/subscriptionOnUpdateGameUserResolver"
+   }
+  },
+  "SubscriptiononDeleteGameUserauth0FunctionSubscriptiononDeleteGameUserauth0FunctionAppSyncFunctionA659A020": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononDeleteGameUserauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3b6d810ef43cdbd93ef462c40b0df0328b89e04f1473a4f82f1178da1f1d5aa0.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/SubscriptiononDeleteGameUserauth0Function/SubscriptiononDeleteGameUserauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononDeleteGameUserpostAuth0FunctionSubscriptiononDeleteGameUserpostAuth0FunctionAppSyncFunction075F49B2": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononDeleteGameUserpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/SubscriptiononDeleteGameUserpostAuth0Function/SubscriptiononDeleteGameUserpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnDeleteGameUserDataResolverFnSubscriptionOnDeleteGameUserDataResolverFnAppSyncFunction723867F1": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnDeleteGameUserDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/SubscriptionOnDeleteGameUserDataResolverFn/SubscriptionOnDeleteGameUserDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononDeleteGameUserResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "FieldName": "onDeleteGameUser",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononDeleteGameUserauth0FunctionSubscriptiononDeleteGameUserauth0FunctionAppSyncFunctionA659A020",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononDeleteGameUserpostAuth0FunctionSubscriptiononDeleteGameUserpostAuth0FunctionAppSyncFunction075F49B2",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnDeleteGameUserDataResolverFnSubscriptionOnDeleteGameUserDataResolverFnAppSyncFunction723867F1",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onDeleteGameUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/subscriptionOnDeleteGameUserResolver"
+   }
+  },
+  "GameUserOwnerDataResolverFnGameUserOwnerDataResolverFnAppSyncFunction581AB9D9": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPINONEDS99A31CDEName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "GameUserOwnerDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/041534e5fd916595f752318f161512d7c7f83b9f2cf32d0f0be381c12253ff68.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/064303962e481067b44300212516363b99aaee539b6bafaf756fdd83ff0b60f0.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/GameUserOwnerDataResolverFn/GameUserOwnerDataResolverFn.AppSyncFunction"
+   }
+  },
+  "GameUserownerResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+    },
+    "FieldName": "owner",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "GameUserOwnerDataResolverFnGameUserOwnerDataResolverFnAppSyncFunction581AB9D9",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"GameUser\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"owner\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthauthenticatedUserRoleA7AC3CB3Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthunauthenticatedUserRoleB658DF33Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736authNestedStackauthNestedStackResourceE4A601FFOutputsamplify12daysavatasandboxe34567b736authamplifyAuthIdentityPool036E423CRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "GameUser"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/gameUserOwnerResolver"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WOwW6DMAyGn6X31GP0sPMK2rGbYPfKJAalgINip1WFePcJOnXa6fcnf7L/HPLsDbId3mRvXb8ffAPziUTJ1Yq2N0XLXxhxJKW4QhHYefWBTUUSUrRkiiQaxj9s+TnjTc6zuzOOwTXwjc1ARxQyHkeYqzA87DDQYnCa5M4W5nLTy6ZExfp58j99JLZriSJw67sUcWv0+3m4UlyMHM4oQirwvoaRAxyT7UnXAsvqfiadkpptXSt2nrvFcHAEF3m55jm85pDtLuL9PiZWPxJUj/wBg+HjejYBAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-12days-avata-sandbox-e34567b736/data/amplifyData/GameUser/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "GetAttGameUserTableStreamArn": {
+   "Description": "Your DynamoDB table StreamArn.",
+   "Value": {
+    "Fn::GetAtt": [
+     "GameUserTable",
+     "TableStreamArn"
+    ]
+   },
+   "Export": {
+    "Name": {
+     "Fn::Join": [
+      ":",
+      [
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "GetAtt:GameUserTable:StreamArn"
+      ]
+     ]
+    }
+   }
+  },
+  "GetAttGameUserTableName": {
+   "Description": "Your DynamoDB table name.",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "GameUser-",
+      {
+       "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+      },
+      "-NONE"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": {
+     "Fn::Join": [
+      ":",
+      [
+       {
+        "Ref": "referencetoamplify12daysavatasandboxe34567b736dataamplifyDataGraphQLAPIDD283ABFApiId"
+       },
+       "GetAtt:GameUserTable:Name"
+      ]
+     ]
+    }
+   }
+  }
+ }
+}

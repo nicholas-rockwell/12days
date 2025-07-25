@@ -1,0 +1,18 @@
+type GameUser @model @auth(rules: [{allow: owner, ownerField: "owner"}])
+{
+  user_id: String!
+  nickname: String!
+  points: Int @default(value: "0")
+  jinglebells: Int @default(value: "0")
+  rank: Int
+  created_at: AWSDateTime
+}
+
+type Game @model @auth(rules: [{allow: owner, ownerField: "owner"}])
+{
+  game_name: String!
+  start_date: AWSDate!
+  invite_code: String!
+  admin_user_id: String
+  created_at: AWSDateTime
+}
