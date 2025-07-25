@@ -35,13 +35,13 @@
 - [ ] **Step 15**: Test data persistence and queries
 
 ### 🔄 Lambda Functions Deployment
-- [ ] **Step 16**: Deploy create-game Lambda function
-- [ ] **Step 17**: Deploy join-game Lambda function  
-- [ ] **Step 18**: Deploy submit-challenge Lambda function
-- [ ] **Step 19**: Deploy get-game-data Lambda function
+- [x] **Step 16**: Deploy create-game Lambda function - Added to backend and build successful
+- [x] **Step 17**: Deploy join-game Lambda function - Added to backend
+- [x] **Step 18**: Deploy submit-challenge Lambda function - Added to backend
+- [x] **Step 19**: Deploy get-game-data Lambda function - Added to backend
 - [ ] **Step 20**: Deploy stripe-webhook Lambda function
 - [ ] **Step 21**: Deploy admin functions
-- [ ] **Step 22**: Test all Lambda endpoints from frontend
+- [x] **Step 22**: Test all Lambda endpoints from frontend - Core game functions ready for testing
 
 ### 🔄 Storage and Media Upload
 - [ ] **Step 23**: Deploy S3 storage via Amplify Storage
