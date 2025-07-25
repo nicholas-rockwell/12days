@@ -1,0 +1,617 @@
+12DAYS WEB APPLICATION - COMPREHENSIVE TECHNICAL SPECIFICATION
+================================================================
+
+PROJECT OVERVIEW
+================
+12Days is a seasonal web application providing 12 daily creative challenges from December 13-24. Users create or join game instances, complete challenges, earn virtual currency (jinglebells), and unlock cosmetics. The app supports multiple simultaneous game participation with both admin and participant roles.
+
+CORE ARCHITECTURE
+=================
+
+Technology Stack:
+- Frontend: Next.js 14 with TypeScript, Tailwind CSS
+- Backend: AWS Amplify with Lambda functions
+- Database: DynamoDB with composite key structure
+- Authentication: AWS Cognito
+- Storage: S3 for media uploads
+- Payments: Stripe for yearly subscriptions
+- Hosting: AWS Amplify Hosting
+- Region: us-west-2
+
+Data Architecture:
+- Single DynamoDB table "TwelveDays" with composite primary key
+- PK: GAME#<year> (e.g., GAME#2025)
+- SK: USER#<user_id>#<game_id> for user entries
+- SK: METADATA#<game_id> for game configuration
+- Additional tables for challenge bank and admin codes
+
+DETAILED FEATURE SPECIFICATIONS
+===============================
+
+1. USER AUTHENTICATION & MANAGEMENT
+===================================
+- AWS Cognito User Pool with email/password authentication
+- Custom attributes: user_id, jinglebells, is_admin
+- No social login initially (family-focused app)
+- Admin codes bypass payment requirements for family members
+- User profile includes: nickname, nameplate_style, cosmetics inventory
+
+2. GAME CREATION SYSTEM
+======================
+Game Types:
+a) DEFAULT GAMES (User participates):
+   - Pre-built challenges from database challenge bank
+   - User pays yearly subscription fee
+   - User becomes participant in their own game
+   - Challenges auto-graded where possible
+
+b) CUSTOM GAMES (User becomes admin):
+   - User designs all 12 days of challenges during setup
+   - User cannot participate (admin role only)
+   - Must define challenge types for each day
+   - Can create custom trivia questions/answers
+   - Can customize photo challenge prompts
+   - Must pay additional fee for admin privileges
+
+Game Creation Flow:
+1. User fills form: game name, start date (defaults Dec 13), admin mode toggle
+2. If admin mode: Complete 12-day challenge designer interface
+3. System generates unique gameId and inviteCode
+4. Creates game metadata entry in DynamoDB
+5. Redirects to Stripe checkout if admin mode
+6. Game becomes joinable via invite code
+
+Restrictions:
+- One custom game per user per year (unless pays for additional)
+- Games cannot span years (Dec 13-24 only)
+- Games created after Dec 24 are for following year
+
+3. GAME JOINING SYSTEM
+=====================
+Join Methods:
+- Invitation link with embedded game code
+- Manual entry of invite code on dashboard
+
+Join Validation:
+- Check if game exists and is valid
+- Verify user not already member
+- Determine payment requirements based on game progress
+- Create user entry with appropriate subscription status
+
+Late Joining:
+- Users joining after game start get 6-hour catch-up window
+- Can complete previous days' challenges within window
+- Small point penalty applied (not jinglebell penalty)
+- Late submissions marked in database
+
+Payment Requirements:
+- First 4 days free for all joiners
+- Day 5+ requires yearly subscription payment
+- Exception: Admin codes provide free access
+- Stripe checkout with game metadata
+
+4. CHALLENGE SYSTEM ARCHITECTURE
+================================
+Challenge Types (6 total):
+
+a) PHOTO UPLOAD:
+   - Prompt-based photo challenges
+   - Participation scoring (not performance-based)
+   - S3 upload via pre-signed URLs
+   - Community viewing of submissions
+   - Points: Participation = base points
+
+b) TRIVIA:
+   - Multiple choice or text answer
+   - Pre-defined questions in challenge bank
+   - Automatic scoring based on correctness
+   - Points: Correct answer + speed bonus
+
+c) WORDLE-STYLE:
+   - 5-letter word guessing game
+   - Pre-defined solutions in database
+   - Interactive UI with guess validation
+   - Points: Correct guess + attempts remaining + speed
+
+d) CROSSWORD:
+   - Mini crossword puzzles
+   - Hard-coded puzzle solutions
+   - Interactive grid interface
+   - Points: Completion + speed bonus
+
+e) TEXT RESPONSE (Admin games only):
+   - Open-ended questions
+   - Admin manual scoring required
+   - Rich text submission interface
+   - Points: Admin-assigned (max limit enforced)
+
+f) CUSTOM/EXTENSIBLE:
+   - Framework for adding new challenge types yearly
+   - Plugin-style architecture for new games
+   - Automatic scoring interface
+
+Challenge Progression:
+- One challenge unlocks per day starting from game start date
+- Users cannot access future days (no skipping ahead)
+- Previous days remain accessible until game ends
+- Late joiners can access all previous days within catch-up window
+
+Scoring System:
+- Base points: 50-125 jinglebells per challenge
+- Factors: Correctness, speed, difficulty, streaks
+- Competition balance: Close scoring to enable comebacks
+- Bonus jinglebells: First login, streaks, special events
+
+5. ADMIN FUNCTIONALITY
+======================
+Admin Dashboard Features:
+- Real-time participant progress tracking
+- Challenge completion statistics
+- Manual scoring interface for text responses
+- Game settings modification (limited post-creation)
+- Participant list management
+
+Custom Challenge Creation:
+- 12-day calendar interface during game setup
+- Challenge type selection per day
+- Custom content creation:
+  * Trivia: 8 custom questions with answers
+  * Photo: Custom prompts and themes
+  * Text Response: Custom questions and scoring rubrics
+- Preview and testing interface
+
+Admin Code Generation:
+- Generate codes for free family access
+- Set usage limits per code
+- Track code redemption
+- Year-specific code validity
+
+6. MULTI-GAME PARTICIPATION
+===========================
+User Dashboard:
+- Game selection dropdown in navigation
+- Game cards showing progress and status
+- Quick access to current day's challenge per game
+- Independent progress tracking per game
+
+Game Context Management:
+- React Context for current game state
+- User profile shared across games
+- Jinglebells accumulate across all games
+- Cosmetics available in all games
+
+Game Independence:
+- Separate leaderboards per game
+- Independent challenge progress
+- Isolated admin privileges
+- Distinct start dates and participants
+
+7. SUBSCRIPTION & PAYMENT MODEL
+===============================
+Pricing Structure:
+- Yearly subscription: $X per user (TBD - likely $3-5)
+- Admin game creation: Additional $Y fee
+- Free trial: First 4 days of any game
+- Family codes: Free access bypass
+
+Payment Triggers:
+- Creating admin game: Immediate payment required
+- Joining game on day 5+: Payment required before access
+- Creating additional admin games: Supplemental payment
+
+Stripe Integration:
+- Checkout session with game metadata
+- Webhook validation for payment confirmation
+- Subscription status updates in DynamoDB
+- Gift purchase options for multiple users
+
+Subscription Management:
+- Annual renewal required for continued access
+- Grace period for expired subscriptions
+- Family plan considerations for future
+
+8. JINGLEBELLS ECONOMY
+======================
+Earning Mechanisms:
+- Daily challenge completion: 50-125 jinglebells
+- Performance bonuses: Speed, accuracy, creativity
+- Streak bonuses: Consecutive day completion
+- Special events: Christmas Day bonus, first login
+- Admin rewards: Family code redemption bonus
+
+Spending System:
+- Single purchase option: 100 jinglebells = 1 present
+- Presents contain random cosmetics with rarity tiers
+- No direct cosmetic purchases (maintains surprise element)
+- Seasonal specials and limited-time offers
+
+Balance Management:
+- Jinglebells persist across game instances
+- No expiration or decay
+- Shared wallet across all user's games
+- Transaction history tracking
+
+9. COSMETIC & PRESENT SYSTEM
+============================
+Cosmetic Categories:
+- Nameplate frames and effects
+- App theme variants (color schemes)
+- Leaderboard styling (fonts, badges, icons)
+- Profile decorations and animations
+- Seasonal exclusive items
+
+Rarity Tiers:
+- Common (60%): Basic colors and simple effects
+- Uncommon (25%): Enhanced styling and animations
+- Rare (12%): Unique designs and special effects
+- Legendary (3%): Exclusive items with premium animations
+
+Present Opening:
+- Animated Christmas present opening sequence
+- Reveal animation with rarity indication
+- Duplicate protection or conversion system
+- Collection progress tracking
+
+Inventory Management:
+- Equip/unequip cosmetics
+- Preview system for customization
+- Set active loadout for nameplate appearance
+- Trading system (future consideration)
+
+10. LEADERBOARD SYSTEM
+======================
+Ranking Calculations:
+- Primary: Total points from completed challenges
+- Tiebreakers: Completion speed, consistency, participation
+- Real-time updates after each submission
+- Historical ranking preservation
+
+Display Features:
+- Sortable by various metrics (points, completion, streaks)
+- Cosmetic-enhanced player cards
+- Progress indicators (days completed/total)
+- Achievement badges and special recognition
+
+Game-Specific Leaderboards:
+- Independent rankings per game instance
+- Cross-game statistics in profile view
+- Year-over-year comparison capabilities
+- Admin view with detailed participant analytics
+
+11. DATA MANAGEMENT STRATEGY
+============================
+DynamoDB Schema Design:
+Primary Table: TwelveDays
+- Partition Key: GAME#<year>
+- Sort Key: USER#<user_id>#<game_id> | METADATA#<game_id>
+- GSI1: user_id (cross-game user lookup)
+- GSI2: game_id (participant lookup within game)
+- GSI3: invite_code (game discovery)
+
+Item Structure:
+User Game Entry:
+{
+  PK: "GAME#2025",
+  SK: "USER#ALY#GAME_ABC123",
+  user_id: "ALY",
+  game_id: "GAME_ABC123",
+  nickname: "Aly",
+  nameplate_style: "christmas_gold",
+  points: 850,
+  bonus_points: 125,
+  rank: 3,
+  jinglebells: 1200,
+  subscription_status: "paid", // paid|trial|free_access|pending_payment
+  challenge_status: {
+    "day_1": "completed",
+    "day_2": "completed",
+    "day_3": "missed",
+    "day_4": "pending"
+  },
+  submission_data: {
+    "day_1": {
+      "text_response": "My answer",
+      "media_url": "s3://bucket/path/to/image.jpg",
+      "score": 85,
+      "submitted_at": "2025-12-13T15:30:00Z"
+    }
+  },
+  timestamps: {
+    "day_1": "2025-12-13T15:30:00Z",
+    "day_2": "2025-12-14T09:15:00Z"
+  },
+  cosmetics: {
+    "nameplates": ["basic_red", "snowflake_rare"],
+    "themes": ["winter_wonderland"],
+    "equipped": {
+      "nameplate": "snowflake_rare",
+      "theme": "winter_wonderland"
+    }
+  },
+  joined_late: false,
+  catch_up_window: null,
+  created_at: "2025-12-13T10:00:00Z",
+  updated_at: "2025-12-14T09:15:00Z"
+}
+
+Game Metadata:
+{
+  PK: "GAME#2025",
+  SK: "METADATA#GAME_ABC123",
+  game_id: "GAME_ABC123",
+  year: 2025,
+  game_name: "Family Christmas Challenge",
+  start_date: "2025-12-13",
+  admin_mode: true,
+  admin_user_id: "NICK",
+  invite_code: "XMAS2025",
+  participant_count: 8,
+  max_participants: 50,
+  game_status: "active", // active|completed|cancelled
+  custom_challenges: [
+    {
+      day: 1,
+      type: "trivia",
+      title: "Family History Quiz",
+      questions: [...],
+      scoring: {...}
+    }
+  ],
+  game_settings: {
+    allow_late_join: true,
+    show_others_submissions: true,
+    catch_up_hours: 6,
+    late_penalty_percent: 10
+  },
+  created_at: "2025-12-10T14:00:00Z"
+}
+
+Challenge Bank Table:
+{
+  PK: "CHALLENGE#TRIVIA",
+  SK: "2025#DAY_5",
+  challenge_type: "trivia",
+  year: 2025,
+  day: 5,
+  title: "Christmas Movie Madness",
+  description: "Test your knowledge of classic Christmas films",
+  challenge_data: {
+    questions: [
+      {
+        question: "What is the name of the Grinch's dog?",
+        options: ["Max", "Rex", "Buddy", "Charlie"],
+        correct_answer: "Max",
+        points: 10
+      }
+    ]
+  },
+  difficulty: "medium",
+  auto_gradable: true,
+  estimated_time_minutes: 5,
+  created_at: "2025-11-01T00:00:00Z"
+}
+
+Admin Codes Table:
+{
+  PK: "ADMIN_CODE",
+  SK: "XMAS_FAMILY_2025",
+  code: "XMAS_FAMILY_2025",
+  year: 2025,
+  uses_remaining: 15,
+  original_uses: 20,
+  created_by: "NICK",
+  description: "Family free access for Christmas 2025",
+  created_at: "2025-12-01T00:00:00Z",
+  expires_at: "2025-12-31T23:59:59Z"
+}
+
+12. SECURITY ARCHITECTURE
+=========================
+Authentication:
+- AWS Cognito User Pool with email verification
+- JWT tokens for API authentication
+- Session management with refresh tokens
+- MFA capability for admin accounts (future)
+
+Authorization:
+- API Gateway Cognito authorizer
+- Lambda function IAM roles with least privilege
+- Resource-based permissions (users can only access their data)
+- Admin role validation for sensitive operations
+
+Data Security:
+- All API calls require authentication
+- S3 media uploads via pre-signed URLs (5-minute expiration)
+- Database queries filtered by user context
+- Sensitive data encrypted at rest
+- No client-side storage of payment information
+
+API Security:
+- Rate limiting on API Gateway
+- Input validation and sanitization
+- SQL injection prevention (NoSQL, but principle applies)
+- XSS protection in frontend
+- CORS configured for domain-specific access
+
+13. INFRASTRUCTURE SCALING
+==========================
+AWS Services Configuration:
+- Lambda: On-demand scaling, provisioned concurrency for peak times
+- DynamoDB: On-demand billing, auto-scaling enabled
+- S3: Standard storage class, lifecycle policies for old media
+- API Gateway: Regional endpoint, caching enabled
+- Cognito: Standard user pool, custom attributes
+
+Performance Optimization:
+- DynamoDB GSI design for efficient queries
+- S3 CloudFront distribution for media delivery
+- Lambda function optimization (memory/timeout tuning)
+- Frontend code splitting and lazy loading
+- Image optimization and compression
+
+Monitoring:
+- CloudWatch logs for all Lambda functions
+- Custom metrics for business KPIs
+- API Gateway request/response logging
+- Error tracking and alerting
+- Performance monitoring and optimization
+
+14. DEVELOPMENT WORKFLOW
+=======================
+Environment Strategy:
+- dev: Development and testing
+- staging: Pre-production validation  
+- prod: Live production environment
+
+Deployment Pipeline:
+- Local development with Amplify mock services
+- Feature branch development with PR reviews
+- Automated testing (unit and integration)
+- Staging deployment for QA
+- Production deployment with rollback capability
+
+Code Organization:
+- Modular component architecture
+- Shared utility functions and hooks
+- Type safety with TypeScript throughout
+- Consistent error handling patterns
+- Comprehensive documentation
+
+15. BUSINESS LOGIC DETAILS
+==========================
+Game Timing:
+- Games always run December 13-24 (12 days)
+- New games created after December 24 are for next year
+- Daily challenges unlock at midnight EST
+- Catch-up window is exactly 6 hours from join time
+
+Scoring Fairness:
+- Designed to keep competition close throughout
+- No excessive penalties for single bad days
+- Comeback mechanics favor consistency over single high scores
+- Late joiner penalties are minimal but present
+
+User Experience Priorities:
+- Family-friendly design (all ages)
+- Inclusive rather than competitive (participation encouraged)
+- Clear feedback on progress and achievements
+- Help text and guidance throughout
+- Mobile-responsive design for all family members
+
+16. FUTURE EXPANSION PLANS
+=========================
+Year 2 Features:
+- Mobile app (React Native with shared backend)
+- Advanced admin analytics and insights
+- Social features (comments, reactions)
+- Team-based challenges and group scoring
+- Custom challenge marketplace
+
+Technical Improvements:
+- GraphQL migration for more efficient data fetching
+- Real-time features with WebSockets
+- Advanced caching strategies
+- CDN optimization for global reach
+- Advanced monitoring and observability
+
+Business Expansion:
+- Corporate team-building packages
+- Educational institution licensing
+- Seasonal variants (Easter, Halloween, etc.)
+- International localization
+- Franchise/white-label opportunities
+
+17. MAINTENANCE & SUPPORT
+========================
+Annual Updates:
+- New challenge content creation (November)
+- Bug fixes and performance improvements
+- UI/UX enhancements based on feedback
+- Security updates and dependency management
+- Database cleanup and archival
+
+Content Management:
+- Challenge bank updated yearly
+- Cosmetic items refreshed seasonally
+- Admin tools for content creators
+- Community feedback integration
+- Quality assurance testing
+
+Operational Support:
+- 24/7 monitoring during active season
+- Customer support channels
+- Payment issue resolution
+- Technical troubleshooting guides
+- Community management
+
+18. SUCCESS METRICS
+==================
+Technical KPIs:
+- 99.9% uptime during December 13-24
+- <2 second page load times
+- <1% error rate on API calls
+- Zero payment processing failures
+- 100% data integrity
+
+Business KPIs:
+- User retention year-over-year
+- Game completion rates
+- Daily active users during season
+- Revenue per user
+- Customer satisfaction scores
+
+Engagement Metrics:
+- Daily challenge completion rates
+- Social sharing and viral growth
+- Time spent in application
+- Jinglebell earning/spending patterns
+- Cosmetic collection completion rates
+
+IMPLEMENTATION PRIORITY
+=======================
+Phase 1 (Christmas 2025 Ready):
+1. Core authentication and user management
+2. Game creation and joining functionality
+3. Basic challenge system (text + photo upload)
+4. Payment integration (Stripe checkout)
+5. Simple leaderboard and progress tracking
+6. Essential admin tools
+
+Phase 2 (Enhanced Experience):
+1. Interactive challenge types (Wordle, Crossword)
+2. Advanced cosmetic system with animations
+3. Comprehensive admin dashboard
+4. Social features and community elements
+5. Mobile optimization and PWA features
+
+Phase 3 (Scale and Expand):
+1. Mobile app development
+2. Advanced analytics and insights
+3. Corporate and educational packages
+4. International expansion
+5. Additional seasonal variants
+
+TECHNICAL CONSIDERATIONS
+=======================
+Performance Requirements:
+- Support 1000+ concurrent users during peak times
+- Handle 10,000+ daily challenge submissions
+- Process payments reliably without delays
+- Maintain responsive UI under load
+- Scale storage for media uploads
+
+Security Requirements:
+- Protect user personal information
+- Secure payment processing
+- Prevent cheating and exploitation
+- Maintain data integrity
+- Comply with data protection regulations
+
+Reliability Requirements:
+- 99.9% uptime during Christmas season
+- Automatic failover and recovery
+- Data backup and disaster recovery
+- Graceful degradation under load
+- Clear error messaging and recovery
+
+This comprehensive specification provides complete context for any AI assistant to understand the 12Days web application architecture, features, business logic, and implementation requirements. Every aspect of the system is detailed for successful development and maintenance.
