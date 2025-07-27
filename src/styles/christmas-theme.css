@@ -1,0 +1,304 @@
+/* Christmas Theme Inspired by kartchfamchristmasAmplify */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+:root {
+  /* Christmas Color Palette */
+  --christmas-red: #8e1b3aff;
+  --christmas-green: #435649;
+  --christmas-light-green: #5a9340;
+  --christmas-gold: #f1c232;
+  --christmas-white: #ffffff;
+  --christmas-black: #000000;
+  
+  /* Background Colors */
+  --bg-overlay: rgba(0, 0, 0, 0.041);
+  --bg-semi-transparent: rgba(255, 255, 255, 0.1);
+  --bg-form: #435649e1;
+  
+  /* Typography */
+  --font-primary: 'Oswald', sans-serif;
+  --font-secondary: Arial, sans-serif;
+  
+  /* Shadows */
+  --text-shadow-main: 1px 1px 5px rgb(0, 0, 0);
+  --text-shadow-strong: -2px 2px 2px #000, 2px 2px 2px #000, 2px -2px 2px #000, -2px -2px 2px #000;
+  --box-shadow-main: 10px 15px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Global Styles */
+html, body {
+  font-family: var(--font-primary);
+  background-color: var(--christmas-green);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Candy Cane Button Style */
+.candy-cane-btn {
+  background-image: linear-gradient(
+    45deg,
+    var(--christmas-white) 25%,
+    var(--christmas-red) 25%,
+    var(--christmas-red) 50%,
+    var(--christmas-white) 50%,
+    var(--christmas-white) 75%,
+    var(--christmas-red) 75%,
+    var(--christmas-red) 100%
+  );
+  background-size: 75px 75px;
+  color: var(--christmas-black);
+  font-weight: bolder;
+  text-shadow: 1px 1px 25px rgb(255, 255, 255);
+  border: 2px solid var(--christmas-black);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  font-size: clamp(0.5rem, 4vw, 21.8px);
+  padding: 10px 20px;
+}
+
+.candy-cane-btn:hover {
+  transform: scale(1.05);
+}
+
+.candy-cane-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Green Button Style */
+.green-btn {
+  background-color: var(--christmas-light-green);
+  color: var(--christmas-white);
+  font-weight: bold;
+  text-shadow: var(--text-shadow-main);
+  border: 2px solid var(--christmas-black);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  font-size: clamp(0.5rem, 4vw, 21.8px);
+  padding: 10px 20px;
+}
+
+.green-btn:hover {
+  transform: scale(1.05);
+  background-color: #6ba547;
+}
+
+/* Red Button Style */
+.red-btn {
+  background-color: var(--christmas-red);
+  color: var(--christmas-white);
+  font-weight: bold;
+  text-shadow: var(--text-shadow-main);
+  border: 2px solid var(--christmas-black);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  font-size: clamp(0.5rem, 4vw, 21.8px);
+  padding: 10px 20px;
+}
+
+.red-btn:hover {
+  transform: scale(1.05);
+  background-color: #a01e43;
+}
+
+/* Container Styles */
+.christmas-container {
+  background-color: var(--bg-overlay);
+  border-radius: 15px;
+  box-shadow: var(--box-shadow-main);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  color: var(--christmas-white);
+  text-shadow: var(--text-shadow-main);
+}
+
+.christmas-card {
+  background-color: var(--bg-semi-transparent);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  color: var(--christmas-white);
+  text-shadow: var(--text-shadow-main);
+}
+
+/* Typography Styles */
+.christmas-heading {
+  font-family: var(--font-primary);
+  font-size: clamp(1.5rem, 10vw, 57.31px);
+  font-weight: bold;
+  color: var(--christmas-white);
+  text-shadow: var(--text-shadow-strong);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.christmas-subheading {
+  font-family: var(--font-primary);
+  font-size: clamp(1rem, 8vw, 41.36px);
+  font-weight: bold;
+  color: var(--christmas-white);
+  text-shadow: var(--text-shadow-main);
+  text-decoration: underline;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.christmas-text {
+  font-family: var(--font-secondary);
+  font-size: clamp(0.5rem, 5vw, 25.85px);
+  color: var(--christmas-white);
+  text-shadow: var(--text-shadow-main);
+  line-height: 1.4;
+}
+
+/* Input Styles */
+.christmas-input {
+  width: 100%;
+  padding: clamp(10px, 2vw, 15px);
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  border-radius: 8px;
+  border: 2px solid var(--christmas-black);
+  background-color: #ffffffe8;
+  color: var(--christmas-black);
+  font-weight: bold;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.christmas-input:focus {
+  outline: none;
+  border-color: var(--christmas-red);
+  box-shadow: 0 0 4px var(--christmas-red);
+}
+
+/* Leaderboard Styles */
+.leaderboard-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(90, 147, 64, 0.8);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  color: var(--christmas-white);
+  text-shadow: var(--text-shadow-main);
+  font-size: clamp(1rem, 1.75rem, 3rem);
+  font-weight: 600;
+}
+
+.leaderboard-rank {
+  background-color: var(--christmas-light-green);
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 60px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.leaderboard-name {
+  flex: 1;
+  text-align: center;
+  padding: 0 15px;
+}
+
+.leaderboard-points {
+  background-color: var(--christmas-light-green);
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 80px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Option/Choice Styles */
+.christmas-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--bg-semi-transparent);
+  color: var(--christmas-white);
+  text-shadow: var(--text-shadow-main);
+  margin-bottom: 10px;
+  font-size: clamp(0.5rem, 3vw, 23.34px);
+  font-weight: bold;
+}
+
+.christmas-option:hover {
+  background-color: var(--christmas-red);
+  border-color: var(--christmas-white);
+  transform: translateY(-2px);
+}
+
+.christmas-option.selected {
+  background-color: var(--christmas-red);
+  border-color: var(--christmas-white);
+}
+
+/* Feedback/Alert Styles */
+.feedback-correct {
+  color: #4CAF50;
+  font-weight: bold;
+  text-shadow: var(--text-shadow-main);
+}
+
+.feedback-incorrect {
+  color: #f44336;
+  font-weight: bold;
+  text-shadow: var(--text-shadow-main);
+}
+
+/* Responsive Utilities */
+.responsive-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Animation Utilities */
+.pulse-animation {
+  animation: christmasPulse 2s infinite ease-in-out;
+}
+
+@keyframes christmasPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.hover-lift {
+  transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-3px);
+}

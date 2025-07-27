@@ -1,0 +1,443 @@
+/* 
+ * Comprehensive Theme System CSS
+ * All themes ship as CSS classes controlled by root theme class
+ * Usage: <div className="theme-christmas"> or <div className="theme-matrix">
+ */
+
+/* ===== CHRISTMAS THEME ===== */
+.theme-christmas {
+  --color-primary: #dc2626;
+  --color-secondary: #16a34a;
+  --color-accent: #f59e0b;
+  --color-background: #435649;
+  --color-text: #ffffff;
+  --color-text-secondary: #e5e7eb;
+  --color-border: #374151;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-card: rgba(255, 255, 255, 0.1);
+  --color-card-hover: rgba(255, 255, 255, 0.2);
+  
+  --font-family: 'Press Start 2P', cursive;
+  --background-gradient: linear-gradient(135deg, #435649 0%, #2d4934 50%, #435649 100%);
+  
+  background: var(--background-gradient);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+.theme-christmas .currency::after { content: " 🔔"; }
+.theme-christmas .present-icon::after { content: "🎁"; }
+.theme-christmas .challenge-icon::after { content: "🎄"; }
+.theme-christmas .trophy-icon::after { content: "🏆"; }
+
+/* Christmas specific styles */
+.theme-christmas .bg-primary { background-color: var(--color-primary); }
+.theme-christmas .bg-secondary { background-color: var(--color-secondary); }
+.theme-christmas .bg-accent { background-color: var(--color-accent); }
+.theme-christmas .bg-card { background-color: var(--color-card); }
+.theme-christmas .bg-card:hover { background-color: var(--color-card-hover); }
+
+.theme-christmas .text-primary { color: var(--color-primary); }
+.theme-christmas .text-secondary { color: var(--color-secondary); }
+.theme-christmas .text-accent { color: var(--color-accent); }
+.theme-christmas .text-main { color: var(--color-text); }
+.theme-christmas .text-muted { color: var(--color-text-secondary); }
+
+.theme-christmas .border-primary { border-color: var(--color-primary); }
+.theme-christmas .border-secondary { border-color: var(--color-secondary); }
+.theme-christmas .border-default { border-color: var(--color-border); }
+
+/* ===== HALLOWEEN THEME ===== */
+.theme-halloween {
+  --color-primary: #f97316;
+  --color-secondary: #7c2d12;
+  --color-accent: #fbbf24;
+  --color-background: #1f2937;
+  --color-text: #f97316;
+  --color-text-secondary: #d1d5db;
+  --color-border: #374151;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-card: rgba(249, 115, 22, 0.1);
+  --color-card-hover: rgba(249, 115, 22, 0.2);
+  
+  --font-family: 'Press Start 2P', cursive;
+  --background-gradient: linear-gradient(135deg, #1f2937 0%, #111827 50%, #1f2937 100%);
+  
+  background: var(--background-gradient);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+.theme-halloween .currency::after { content: " 🎃"; }
+.theme-halloween .present-icon::after { content: "👻"; }
+.theme-halloween .challenge-icon::after { content: "🕷️"; }
+.theme-halloween .trophy-icon::after { content: "💀"; }
+
+/* Halloween specific styles */
+.theme-halloween .bg-primary { background-color: var(--color-primary); }
+.theme-halloween .bg-secondary { background-color: var(--color-secondary); }
+.theme-halloween .bg-accent { background-color: var(--color-accent); }
+.theme-halloween .bg-card { background-color: var(--color-card); }
+.theme-halloween .bg-card:hover { background-color: var(--color-card-hover); }
+
+.theme-halloween .text-primary { color: var(--color-primary); }
+.theme-halloween .text-secondary { color: var(--color-secondary); }
+.theme-halloween .text-accent { color: var(--color-accent); }
+.theme-halloween .text-main { color: var(--color-text); }
+.theme-halloween .text-muted { color: var(--color-text-secondary); }
+
+.theme-halloween .border-primary { border-color: var(--color-primary); }
+.theme-halloween .border-secondary { border-color: var(--color-secondary); }
+.theme-halloween .border-default { border-color: var(--color-border); }
+
+/* ===== FOURTH OF JULY THEME ===== */
+.theme-fourth_july {
+  --color-primary: #dc2626;
+  --color-secondary: #2563eb;
+  --color-accent: #ffffff;
+  --color-background: #1e40af;
+  --color-text: #ffffff;
+  --color-text-secondary: #e5e7eb;
+  --color-border: #374151;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-card: rgba(255, 255, 255, 0.15);
+  --color-card-hover: rgba(255, 255, 255, 0.25);
+  
+  --font-family: 'Press Start 2P', cursive;
+  --background-gradient: linear-gradient(135deg, #1e40af 0%, #dc2626 50%, #ffffff 100%);
+  
+  background: var(--background-gradient);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+.theme-fourth_july .currency::after { content: " 🇺🇸"; }
+.theme-fourth_july .present-icon::after { content: "🎆"; }
+.theme-fourth_july .challenge-icon::after { content: "🦅"; }
+.theme-fourth_july .trophy-icon::after { content: "⭐"; }
+
+/* Fourth of July specific styles */
+.theme-fourth_july .bg-primary { background-color: var(--color-primary); }
+.theme-fourth_july .bg-secondary { background-color: var(--color-secondary); }
+.theme-fourth_july .bg-accent { background-color: var(--color-accent); }
+.theme-fourth_july .bg-card { background-color: var(--color-card); }
+.theme-fourth_july .bg-card:hover { background-color: var(--color-card-hover); }
+
+.theme-fourth_july .text-primary { color: var(--color-primary); }
+.theme-fourth_july .text-secondary { color: var(--color-secondary); }
+.theme-fourth_july .text-accent { color: var(--color-accent); }
+.theme-fourth_july .text-main { color: var(--color-text); }
+.theme-fourth_july .text-muted { color: var(--color-text-secondary); }
+
+.theme-fourth_july .border-primary { border-color: var(--color-primary); }
+.theme-fourth_july .border-secondary { border-color: var(--color-secondary); }
+.theme-fourth_july .border-default { border-color: var(--color-border); }
+
+/* ===== MATRIX THEME (SECRET) ===== */
+.theme-matrix {
+  --color-primary: #00ff00;
+  --color-secondary: #008000;
+  --color-accent: #00ff41;
+  --color-background: #000000;
+  --color-text: #00ff00;
+  --color-text-secondary: #008000;
+  --color-border: #00ff00;
+  --color-success: #00ff00;
+  --color-warning: #ffff00;
+  --color-error: #ff0000;
+  --color-card: rgba(0, 255, 0, 0.1);
+  --color-card-hover: rgba(0, 255, 0, 0.2);
+  
+  --font-family: 'Courier New', monospace;
+  --background-gradient: linear-gradient(135deg, #000000 0%, #001100 50%, #000000 100%);
+  
+  background: var(--background-gradient);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+.theme-matrix .currency::after { content: " ₿"; }
+.theme-matrix .present-icon::after { content: "📦"; }
+.theme-matrix .challenge-icon::after { content: "💻"; }
+.theme-matrix .trophy-icon::after { content: "👑"; }
+
+/* Matrix specific animations */
+.theme-matrix {
+  position: relative;
+}
+
+.theme-matrix::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/themes/matrix/code-rain.gif');
+  background-repeat: repeat;
+  background-size: cover;
+  opacity: 0.1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Matrix specific styles */
+.theme-matrix .bg-primary { background-color: var(--color-primary); }
+.theme-matrix .bg-secondary { background-color: var(--color-secondary); }
+.theme-matrix .bg-accent { background-color: var(--color-accent); }
+.theme-matrix .bg-card { background-color: var(--color-card); }
+.theme-matrix .bg-card:hover { background-color: var(--color-card-hover); }
+
+.theme-matrix .text-primary { color: var(--color-primary); }
+.theme-matrix .text-secondary { color: var(--color-secondary); }
+.theme-matrix .text-accent { color: var(--color-accent); }
+.theme-matrix .text-main { color: var(--color-text); }
+.theme-matrix .text-muted { color: var(--color-text-secondary); }
+
+.theme-matrix .border-primary { border-color: var(--color-primary); }
+.theme-matrix .border-secondary { border-color: var(--color-secondary); }
+.theme-matrix .border-default { border-color: var(--color-border); }
+
+/* Matrix text glow effect */
+.theme-matrix .text-glow {
+  text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+}
+
+/* ===== DEVELOPER THEME (SECRET) ===== */
+.theme-developer {
+  --color-primary: #3b82f6;
+  --color-secondary: #6366f1;
+  --color-accent: #10b981;
+  --color-background: #0f172a;
+  --color-text: #f1f5f9;
+  --color-text-secondary: #cbd5e1;
+  --color-border: #475569;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-card: rgba(59, 130, 246, 0.1);
+  --color-card-hover: rgba(59, 130, 246, 0.2);
+  
+  --font-family: 'Fira Code', 'Consolas', monospace;
+  --background-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  
+  background: var(--background-gradient);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+.theme-developer .currency::after { content: " ⚡"; }
+.theme-developer .present-icon::after { content: "📱"; }
+.theme-developer .challenge-icon::after { content: "🚀"; }
+.theme-developer .trophy-icon::after { content: "🎯"; }
+
+/* Developer specific styles */
+.theme-developer .bg-primary { background-color: var(--color-primary); }
+.theme-developer .bg-secondary { background-color: var(--color-secondary); }
+.theme-developer .bg-accent { background-color: var(--color-accent); }
+.theme-developer .bg-card { background-color: var(--color-card); }
+.theme-developer .bg-card:hover { background-color: var(--color-card-hover); }
+
+.theme-developer .text-primary { color: var(--color-primary); }
+.theme-developer .text-secondary { color: var(--color-secondary); }
+.theme-developer .text-accent { color: var(--color-accent); }
+.theme-developer .text-main { color: var(--color-text); }
+.theme-developer .text-muted { color: var(--color-text-secondary); }
+
+.theme-developer .border-primary { border-color: var(--color-primary); }
+.theme-developer .border-secondary { border-color: var(--color-secondary); }
+.theme-developer .border-default { border-color: var(--color-border); }
+
+/* Developer theme shows admin tools */
+.theme-developer .admin-tools { 
+  display: block !important; 
+  opacity: 1 !important;
+}
+
+.theme-developer .debug-info { 
+  display: block !important; 
+  opacity: 1 !important;
+}
+
+/* ===== DEBUG THEME (SECRET) ===== */
+.theme-debug {
+  --color-primary: #ff00ff;
+  --color-secondary: #00ffff;
+  --color-accent: #ffff00;
+  --color-background: #ffffff;
+  --color-text: #000000;
+  --color-text-secondary: #333333;
+  --color-border: #000000;
+  --color-success: #00ff00;
+  --color-warning: #ff8800;
+  --color-error: #ff0000;
+  --color-card: rgba(0, 0, 0, 0.1);
+  --color-card-hover: rgba(0, 0, 0, 0.2);
+  
+  --font-family: 'Courier New', monospace;
+  --background-gradient: linear-gradient(45deg, #ff00ff 0%, #00ffff 50%, #ffff00 100%);
+  
+  background: var(--background-gradient);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+.theme-debug .currency::after { content: " 🔧"; }
+.theme-debug .present-icon::after { content: "📊"; }
+.theme-debug .challenge-icon::after { content: "🐛"; }
+.theme-debug .trophy-icon::after { content: "✅"; }
+
+/* Debug specific styles */
+.theme-debug .bg-primary { background-color: var(--color-primary); }
+.theme-debug .bg-secondary { background-color: var(--color-secondary); }
+.theme-debug .bg-accent { background-color: var(--color-accent); }
+.theme-debug .bg-card { background-color: var(--color-card); }
+.theme-debug .bg-card:hover { background-color: var(--color-card-hover); }
+
+.theme-debug .text-primary { color: var(--color-primary); }
+.theme-debug .text-secondary { color: var(--color-secondary); }
+.theme-debug .text-accent { color: var(--color-accent); }
+.theme-debug .text-main { color: var(--color-text); }
+.theme-debug .text-muted { color: var(--color-text-secondary); }
+
+.theme-debug .border-primary { border-color: var(--color-primary); }
+.theme-debug .border-secondary { border-color: var(--color-secondary); }
+.theme-debug .border-default { border-color: var(--color-border); }
+
+/* Debug theme shows all hidden elements */
+.theme-debug .debug-info,
+.theme-debug .admin-tools,
+.theme-debug .hidden-debug { 
+  display: block !important; 
+  opacity: 1 !important;
+  border: 2px dashed var(--color-error);
+  padding: 4px;
+}
+
+/* ===== UNIVERSAL THEME UTILITIES ===== */
+
+/* Hide admin tools by default */
+.admin-tools,
+.debug-info {
+  display: none;
+  opacity: 0;
+}
+
+/* Theme transition animations */
+.theme-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive theme adjustments */
+@media (max-width: 768px) {
+  .theme-christmas,
+  .theme-halloween,
+  .theme-fourth_july,
+  .theme-matrix,
+  .theme-developer,
+  .theme-debug {
+    font-size: 0.8rem;
+  }
+}
+
+/* Button styles that adapt to themes */
+.btn-theme {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+  padding: 8px 16px;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-theme:hover {
+  background-color: var(--color-secondary);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.btn-theme:active {
+  transform: translateY(0);
+}
+
+/* Card styles that adapt to themes */
+.card-theme {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+  transition: all 0.2s ease;
+}
+
+.card-theme:hover {
+  background-color: var(--color-card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Input styles that adapt to themes */
+.input-theme {
+  background-color: var(--color-card);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+  padding: 8px 12px;
+  font-family: var(--font-family);
+  font-size: 0.8rem;
+}
+
+.input-theme:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 5px var(--color-primary);
+}
+
+/* Text styles that adapt to themes */
+.heading-theme {
+  color: var(--color-primary);
+  font-family: var(--font-family);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subheading-theme {
+  color: var(--color-secondary);
+  font-family: var(--font-family);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Present box animations that work with all themes */
+.present-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Sparkle effects for special themes */
+.theme-matrix .sparkle,
+.theme-debug .sparkle {
+  position: relative;
+}
+
+.theme-matrix .sparkle::after {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  animation: sparkle 1.5s infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
+}

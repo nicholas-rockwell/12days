@@ -1,0 +1,90 @@
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 3px solid #ffe066;
+  box-shadow: 0 -2px 18px rgba(255, 224, 102, 0.5);
+  z-index: 1000;
+  padding: 0.3rem 0;
+  flex-wrap: nowrap;
+}
+
+.navButton {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  flex: 1;
+  padding: 0.5em 0.3em;
+  transition: transform 0.15s ease, color 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 1.7em;
+  margin-bottom: 0.1em;
+}
+
+.label {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7em;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #8e1b3a;
+  text-shadow: 0 1px 4px #ffe066;
+  letter-spacing: 1px;
+}
+
+.navbar .active {
+  color: #ffe066;
+  text-shadow: 0 0 8px #8e1b3a, 0 0 20px #ffe066;
+  transform: scale(1.1);
+}
+
+@media (hover: hover) {
+  .navButton:hover {
+    transform: scale(1.05);
+    color: #ffe066;
+  }
+}
+
+@media (min-width: 600px) {
+  .icon { 
+    font-size: 2em; 
+  }
+  .label { 
+    font-size: 0.8em; 
+  }
+  .navButton { 
+    padding: 0.6em 0.5em; 
+  }
+}
+
+@media (min-width: 900px) {
+  .navbar {
+    justify-content: space-evenly;
+    padding: 0.7rem 1rem;
+  }
+  .navButton {
+    flex: unset;
+    padding: 0.7em 1em;
+  }
+  .icon { 
+    font-size: 2.2em; 
+  }
+  .label { 
+    font-size: 0.85em; 
+  }
+}
