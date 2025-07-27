@@ -3,51 +3,329 @@
 
 PROJECT OVERVIEW
 ================
-12Days is a seasonal web application providing 12 daily creative challenges from December 13-24. Users create or join game instances, complete challenges, earn virtual currency (jinglebells), and unlock cosmetics. The app supports multiple simultaneous game participation with both admin and participant roles.
+12Days is a seasonal web application providing 12 daily creative challenges from a customizable start date (default December 13th). Users create or join themed game instances, complete time-based challenges with speed bonuses, earn virtual currency (jingle bells), and unlock cosmetics through a present system. The app features a comprehensive theme system for visual customization and supports multiple challenge types with anti-cheat measures.
 
 CORE ARCHITECTURE
 =================
 
 Technology Stack:
-- Frontend: Next.js 14 with TypeScript, Tailwind CSS
-- Backend: AWS Amplify with Lambda functions
-- Database: DynamoDB with composite key structure
-- Authentication: AWS Cognito
-- Storage: S3 for media uploads
-- Payments: Stripe for yearly subscriptions
+- Frontend: Next.js 14 with TypeScript, Tailwind CSS, Framer Motion
+- Backend: AWS Amplify Gen 2 with Lambda functions  
+- Database: DynamoDB single-table design with efficient query patterns
+- Authentication: AWS Cognito with email verification
+- Storage: S3 for photo challenge uploads
 - Hosting: AWS Amplify Hosting
 - Region: us-west-2
 
 Data Architecture:
-- Single DynamoDB table "TwelveDays" with composite primary key
-- PK: GAME#<year> (e.g., GAME#2025)
-- SK: USER#<user_id>#<game_id> for user entries
-- SK: METADATA#<game_id> for game configuration
-- Additional tables for challenge bank and admin codes
+- Extended single-table DynamoDB design for cost efficiency
+- PK/SK patterns optimized for minimal RCU/WCU consumption
+- Theme-ready structure supporting unlimited visual customizations
+- Legacy 2024 data fully migrated and preserved
+- Content tracking system to prevent challenge repeats
+
+THEME SYSTEM ARCHITECTURE
+==========================
+CSS-Based Theme Engine:
+- All themes ship as CSS classes controlled by single database flag
+- Root element gets `theme-{themeName}` class from game metadata
+- Theme-specific assets (backgrounds, sounds, icons) loaded conditionally
+- Instant theme switching via database value changes
+- Secret themes accessible only via database manipulation
+
+Theme Categories:
+- Standard Themes: Christmas, Halloween, Fourth of July
+- Secret Themes: Matrix, Developer, Debug modes
+- Future Themes: Seasonal auto-switching, user-unlockable themes
+- Admin Themes: Special styling with enhanced admin tool visibility
+
+Implementation Structure:
+```css
+.theme-christmas .bg-primary { background: #dc2626; }
+.theme-halloween .bg-primary { background: #f97316; }
+.theme-matrix .bg-primary { background: #00ff00; }
+```
 
 DETAILED FEATURE SPECIFICATIONS
 ===============================
 
-1. USER AUTHENTICATION & MANAGEMENT
+1. GAME TIMELINE & CHALLENGE ACCESS SYSTEM
+==========================================
+Date Management:
+- Default start date: December 13th (customizable by admin)
+- Game duration: Always 12 days from start date
+- End date calculation: Automatically displayed when admin sets start date
+- Timezone handling: Based on user's current location (not locked at join)
+- Daily unlock: New challenges available at midnight local time
+- Access restriction: Only current day's challenge accessible (except late joiners)
+
+Late Joiner Catch-Up System:
+- Definition: Anyone joining after game's designated start date
+- Full access: Late joiners can access ALL previous challenges until current day ends
+- Equal future access: Same daily unlock schedule as existing users
+- Catch-up window: Previous challenges remain available until caught up
+- Join tracking: `joinedAt` timestamp added to user records
+
+Challenge Access & Expiry Rules:
+- Daily expiry: Previous day's challenge becomes completely inaccessible at midnight
+- No historical access: Users cannot view past challenge content or details
+- Score persistence: Only scores/jingle bells remain visible via leaderboard
+- Engagement strategy: Forces daily check-ins to discover new challenges
+- Anti-cheat policy: Technical failures result in lost access (no retries)
+
+2. CHALLENGE SYSTEM ARCHITECTURE (MODULAR DESIGN)
+================================================
+Challenge Types (4 Core Types):
+
+a) TRIVIA CHALLENGES:
+   - Format: Multiple choice only (4 options per question)  
+   - Custom admin questions with no-repeat tracking system
+   - Character limits: TBD based on final UI design
+   - Answer structure: Question + 4 choices + correct answer index
+   - Validation: All 4 options filled, one marked correct
+   - Automatic scoring: Immediate results with correct answers shown
+
+b) WORDLE CHALLENGES:
+   - Admin-customizable 5-letter words
+   - Full colored-tile interface using existing legacy code
+   - Interactive gameplay with guess validation
+   - Speed bonus system integrated
+   - Word bank management to prevent repeats
+
+c) CROSSWORD CHALLENGES:
+   - Layout templates stored in TypeScript code (`src/data/crosswordLayouts.ts`)
+   - Word data stored in database with layout identifier references
+   - Interactive grid with "check puzzle" button using existing legacy code
+   - Kid-friendly design with error highlighting (non-standard crossword)
+   - Manual creation: ~12 crosswords created by Nicholas
+   - Usage limit: Max 2-3 crossword challenges per game instance
+   - Repeat prevention: Track used crosswords per user across all games
+
+d) PHOTO CHALLENGES:
+   - Custom games only (requires admin for 1-10 grading)
+   - In-app camera interface for photo capture/upload
+   - S3 storage with per-game, per-user structure
+   - Grading system: 1-10 scale = 10-100 points
+   - Admin grading interface: Score photos next day
+   - Results display: View all photos + scores after grading complete
+
+Challenge Timing & Scoring System:
+- Time bonuses: All challenges have speed bonuses (20% maximum)
+- Threshold: 2-minute mark for full bonus
+- Degradation: -5% bonus per minute after 2 minutes  
+- Rounding rule: Always round UP (no decimals in points/jingle bells)
+- Timer display: Visible countdown/stopwatch during challenges
+- Pre-challenge warning: Popup warns about timed nature
+- Photo timing: Timer continues during photo capture/upload
+- Point conversion: 2 points = 1 jingle bell
+
+3. ADMIN FEATURES & INTERFACE SEPARATION
+========================================
+Admin Interface Design:
+- Role-based views: Admins see data management instead of standard game views
+- Dashboard replacement: Replace Challenge/Present tabs with Grading/Management
+- Shared access: Leaderboard and Profile remain accessible to admins
+- Permission model: Only game creator gets admin privileges
+- User separation: Standard players see normal game flow without admin complexity
+
+Admin Dashboard Features:
+- Submission tracking per day with completion statistics
+- Photo grading queue with 1-10 scoring interface
+- Game progress overview with participant analytics
+- Challenge assignment interface: List view with dropdowns for each day (1-12)
+- Dropdown options: Trivia, Wordle, Crossword, Photo Challenge
+- User experience: Simple, clear interface for non-technical admins
+
+Custom Game Creation Requirements:
+- Content creation timing: All custom content created during game setup
+- Content types: Wordle words, trivia questions, photo prompts
+- No live editing: No day-by-day content addition after game starts
+- Validation system: Ensure all 12 days have content before game activation
+- Setup completion: Admin cannot start game until all setup complete
+- No preview/testing: Simplified approach focusing on data management
+
+4. DATABASE ARCHITECTURE (THEME-READY)
+======================================
+Enhanced Single Table Design:
+- Extended TwelveDaysUser table structure
+- Theme support in game metadata for visual customization
+- Content tracking to prevent trivia/crossword repeats
+- Query optimization with efficient PK/SK patterns
+- Legacy data preservation with full 2024 migration
+
+Database Schema Structure:
+```
+PK: GAME#{gameId}    SK: METADATA               # Game settings, theme, dates
+PK: GAME#{gameId}    SK: USER#{userId}          # User participation data
+PK: GAME#{gameId}    SK: CHALLENGE#{day}        # Daily challenge assignments  
+PK: GAME#{gameId}    SK: CONTENT#{type}#{id}    # Custom content storage
+PK: USER#{userId}    SK: PROFILE                # Cross-game user profile
+PK: THEME#{themeId}  SK: METADATA               # Theme definitions
+PK: CROSSWORD#{id}   SK: LAYOUT                 # Crossword layout references
+PK: CROSSWORD#{id}   SK: WORDS#{gameId}         # Game-specific word mappings
+```
+
+User Progress Tracking:
+- Complete history: All challenges, scores, timestamps
+- Challenge status: Completed/incomplete per day
+- Performance data: Points earned, time taken, accuracy  
+- Comprehensive user progress records in DynamoDB
+- Join timestamp tracking for late joiner logic
+
+5. SECURITY & SUBMISSION CONTROL
+================================
+Anti-Cheat Measures:
+- One-time submission: Multiple validation checks
+- Challenge lock: Mark completed when user enters (after confirmation popup)
+- No resets: Prevent page refresh timer exploitation
+- DynamoDB tracking: Challenge completion status per user
+- Technical failure policy: User loses access (no accommodation for connection issues)
+- Browser crash policy: No restoration of in-progress challenges
+
+Authentication & Authorization:
+- AWS Cognito User Pool with email verification
+- JWT tokens for API authentication
+- Resource-based permissions (users access only their data)
+- Admin role validation for sensitive operations
+- API Gateway Cognito authorizer with rate limiting
+
+6. USER INTERFACE REQUIREMENTS
+==============================
+Challenge View Interface:
+- Submission status display if completed
+- Day's challenge button if available  
+- Performance recap for completed challenges
+- Confirmation popup: Verify readiness before starting (prevents re-opening)
+- Immediate feedback: Score, bells earned, correct answers post-completion
+- Game creation flow: Challenge setup integrated into game creation
+
+Mobile-First Design:
+- 4-view bottom navigation: Home, Leaderboard, Presents, Profile
+- Responsive layout optimized for phone usage
+- Theme-based visual hierarchy with festive styling
+- Smooth transitions and loading states
+- Christmas theming with gradients and animations
+
+7. PRESENT SYSTEM & COSMETICS
+=============================
+Jingle Bell Economy:
+- Earning: 2 points = 1 jingle bell conversion
+- Present purchase: Spend bells on mystery presents  
+- Loot box opening: League of Legends-style animations with Framer Motion
+- Cosmetic inventory: Track unlocked backgrounds, borders, nameplates
+- Equipment system: Customize leaderboard appearance
+
+Present Box Component:
+- Animated opening sequences with reveal animations
+- Rarity indication and collection progress tracking
+- Theme-specific present designs and animations
+- Duplicate protection or conversion system
+
+8. LEGACY DATA INTEGRATION
+==========================
+2024 Migration Complete:
+- 17 family members migrated with complete historical data
+- Nicholas admin record added (0 points as administrator)
+- Challenge progress, submission data, timestamps preserved
+- Ranking system maintained for "Previous Year" viewing
+- Email strategy: Placeholder emails for gradual user onboarding
+- Historical access: 2024 game structure created for reference
+
+Data Preservation:
+- Points, challenge status, submission data intact
+- JSON field handling: Proper serialization for Amplify GraphQL
+- Email mapping system for linking Cognito users to legacy data
+- Cross-game statistics available in profile view
+
+9. IMPLEMENTATION ARCHITECTURE
+==============================
+Component System:
+- PresentBox: Loot box opening with Framer Motion animations
+- MobileGameDashboard: Bottom navigation with 4 views
+- TriviaChallenge: Timed challenge system with countdown
+- Theme-responsive components adapting to selected theme
+- Modular challenge system for easy expansion
+
+Development Workflow:
+- Next.js 14 development server at http://localhost:3000
+- Component testing at /test endpoint
+- Real DynamoDB data for testing
+- AWS Amplify Gen 2 backend with deployed services
+- GraphQL API endpoint with proper authorization
+
+10. CROSSWORD SYSTEM IMPLEMENTATION
 ===================================
-- AWS Cognito User Pool with email/password authentication
-- Custom attributes: user_id, jinglebells, is_admin
-- No social login initially (family-focused app)
-- Admin codes bypass payment requirements for family members
-- User profile includes: nickname, nameplate_style, cosmetics inventory
+Architecture Design:
+- Layout templates: Crossword grids as TypeScript objects
+- Word data storage: Database word mappings with layout references
+- Example structure: Layout "christmas_1" with corresponding database entries
+- Legacy integration: Use existing crossword interface code
+- Scalable design: Support unlimited layouts with efficient tracking
 
-2. GAME CREATION SYSTEM
-======================
-Game Types:
-a) DEFAULT GAMES (User participates):
-   - Pre-built challenges from database challenge bank
-   - User pays yearly subscription fee
-   - User becomes participant in their own game
-   - Challenges auto-graded where possible
+Content Management:
+- Manual creation: Nicholas creates approximately 12 crosswords manually
+- Usage optimization: Max 2-3 crossword challenges per game instance
+- Repeat prevention: Track used crosswords per user across all games
+- Scalability: Manual approach sufficient for current user base
+- Word bank system: Efficient storage and retrieval of crossword solutions
 
-b) CUSTOM GAMES (User becomes admin):
-   - User designs all 12 days of challenges during setup
-   - User cannot participate (admin role only)
+11. FUTURE EXPANSION FRAMEWORK
+==============================
+Theme Customization:
+- Unlimited theme support through CSS class system
+- Seasonal auto-switching capabilities
+- User-unlockable themes through achievements
+- Corporate/educational custom themes
+- A/B testing different visual experiences
+
+Challenge System Expansion:
+- Modular design supports unlimited new challenge types
+- Plugin-style architecture for yearly additions
+- Admin interface automatically adapts to new challenge types
+- Scoring system flexible for different challenge mechanics
+- Legacy code integration patterns established
+
+12. SUCCESS CRITERIA FOR CHRISTMAS 2025
+=======================================
+Minimum Viable Product (MVP):
+- ✅ Historical data: 2024 game results viewable and preserved
+- 🎯 New game creation: Nicholas can set up 2025 game
+- 🎯 Family onboarding: Easy signup process for 17+ family members
+- 🎯 Daily challenges: All 4 challenge types working with time bonuses
+- 🎯 Live leaderboard: Real-time rankings with theme integration
+- 🎯 Present shop: Fun reward system with loot box animations
+
+Enhanced Experience Goals:
+- Mobile optimization: Perfect experience on all family phones
+- Theme system: Seamless visual customization
+- Admin interface: Complete separation with data management tools
+- Reliable performance: Handle 20+ concurrent users smoothly
+- Engaging UX: Animations and feedback keep family excited daily
+
+TECHNICAL CONSIDERATIONS
+=======================
+Performance Requirements:
+- 99.9% uptime during active game periods
+- <2 second page load times across all themes
+- Support 1000+ concurrent users during peak times
+- Handle daily challenge submissions efficiently
+- Responsive theme switching without performance impact
+
+Security Requirements:
+- Protect user personal information and game data
+- Prevent cheating and challenge exploitation
+- Maintain data integrity across theme changes
+- Secure admin interface with proper role validation
+- Anti-cheat measures preventing timer manipulation
+
+Development Best Practices:
+- TypeScript throughout for type safety
+- Component-based architecture for reusability
+- Theme system following CSS best practices
+- Database queries optimized for cost efficiency
+- Comprehensive error handling and user feedback
+
+This specification provides complete context for developing the 12Days web application with full theme system support, comprehensive challenge architecture, proper admin interface separation, and all clarifications from our detailed planning sessions. Every aspect has been thoroughly planned to ensure successful implementation for Christmas 2025.
    - Must define challenge types for each day
    - Can create custom trivia questions/answers
    - Can customize photo challenge prompts
